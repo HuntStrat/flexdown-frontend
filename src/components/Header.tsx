@@ -3,11 +3,14 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn, FaPhoneAlt, FaRegClock } from '
 import { IoMail } from "react-icons/io5";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { SiGmail } from 'react-icons/si';
+import { useWindowResize } from '@/utils/windowResize';
 
 const Header: React.FC = () => {
+   const isMobile = useWindowResize()
   return (
-    <header className="w-full p-2 bg-white text-gray flex justify-around items-center border-b-2 border-gray-700">
-      <div className="w-30% flex space-x-4">
+    <header className={`w-full p-2 bg-white text-gray flex justify-around items-center border-b-2 border-gray-700`}>
+{!isMobile &&
+      <div className={`w-30% flex space-x-4 `}>
         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white-500 rounded-full p-2 bg-facebook">
           <FaFacebookF fill='white' />
         </a>
@@ -24,6 +27,7 @@ const Header: React.FC = () => {
           <FaSquareXTwitter fill='white' />
         </a>
       </div>
+      }
       <div className="w-80% flex space-x-4 justify-between">
   <ul className="flex space-x-4 w-full">
     <li className="p-2 text-sm w-40%">
@@ -40,6 +44,7 @@ const Header: React.FC = () => {
       </a>
       <p className='text-grayy font-semibold'>Email us at</p>
     </li>
+    {!isMobile &&
     <li className="p-2 text-sm">
       <a href="" className="flex items-center space-x-2">
         <FaRegClock />
@@ -47,6 +52,7 @@ const Header: React.FC = () => {
       </a>
       <p className='text-grayy font-semibold'>Open everyday</p>
     </li>
+}
   </ul>
       </div>
     </header>
