@@ -9,6 +9,16 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+    colors: {
+      'primary': '#010948',
+      'facebook': '#1877F2',
+      'instagram': '#c5377d',
+      'mail': '#DB4437',
+      'linkedin' : '#0077B5',
+      'black': '#000000',
+      'grayy' : '#888',
+      
+            },
     container: {
       center: true,
 
@@ -18,9 +28,7 @@ module.exports = {
         lg: '976px',
         xl: '1440px',
       },
-      colors: {
-primary: '#010948'
-      },
+      
     },
     extend: {
       keyframes: {
