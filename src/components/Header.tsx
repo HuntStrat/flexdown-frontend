@@ -1,8 +1,9 @@
 import React from 'react';
 import { FaArrowRight } from "react-icons/fa";
 import Navbar from './Navbar';
+import { useWindowResize } from '@/utils/windowResize';
 const Header: React.FC = () => {
-
+  const isMobile = useWindowResize();
   return (
     <header className="bg-real-estate-background relative h-[70vh] bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center font-lexend ">
       {/* Navbar */}
@@ -12,7 +13,7 @@ const Header: React.FC = () => {
 
       {/* Centered Content */}
       <div className="flex flex-col justify-start items-start text-greyy w-3/4">
-      <h1 className="text-5xl text-logo font-bold mb-4">
+      <h1 className={`text-4xl md:text-5xl text-logo font-bold mb-4`}>
     Beautiful <br /> homes made<br /> for you
   </h1>
         <span className="max-w-xl text-logo pr-16">
