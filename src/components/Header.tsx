@@ -12,7 +12,7 @@ const Header: React.FC = () => {
 
       {/* Centered Content */}
       <div className="flex flex-col justify-start items-start text-greyy w-3/4">
-      <h1 className="text-6xl text-logo font-bold mb-4">
+      <h1 className="text-5xl text-logo font-bold mb-4">
     Beautiful <br /> homes made<br /> for you
   </h1>
         <span className="max-w-xl text-logo pr-16">
