@@ -7,7 +7,7 @@ const Features: React.FC = () => {
   return (
     <div className="w-full h-[40vh] flex items-center justify-around bg-white font-lexend ">
       {/* Flex container for each feature */}
-      <div className='flex w-[30%] flex-row items-start justify-between px-8'>
+      <div className='flex w-[30%] flex-row items-start justify-between'>
         <div>
         <SiVorondesign className="text-2xl text-logo" />
         </div>
