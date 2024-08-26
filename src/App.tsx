@@ -1,12 +1,16 @@
-import Header from './components/Header'
+import Home from '../src/pages/Home'
+import { HelmetProvider } from 'react-helmet-async';
 import './App.css'
-
+import '@fontsource/lexend';
 function App() {
 
 
   return (
     <>
-     <Header />
+    <HelmetProvider>
+     <Home />
+     </HelmetProvider>
+ 
     </>
   )
 }
