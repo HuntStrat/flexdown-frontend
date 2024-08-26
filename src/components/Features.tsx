@@ -2,12 +2,14 @@ import React from 'react';
 import { SiVorondesign } from "react-icons/si";
 import { BsGraphUpArrow } from "react-icons/bs";
 import { IoIosRocket } from "react-icons/io";
+import { useWindowResize } from '@/utils/windowResize';
 
 const Features: React.FC = () => {
+    const isMobile = useWindowResize();
   return (
-    <div className="w-full h-[40vh] flex items-center justify-around bg-white font-lexend ">
-      {/* Flex container for each feature */}
-      <div className='flex w-[30%] flex-row items-start justify-between'>
+    <div className={`w-full h-auto flex ${isMobile ? 'flex-col' : 'flex-row'} items-center justify-around bg-white font-lexend`}>
+ 
+      <div className={`flex ${isMobile ? 'w-[80%] pb-8' : 'w-[30%]'} flex-row items-start justify-between`}>
         <div>
         <SiVorondesign className="text-2xl text-logo" />
         </div>
@@ -17,7 +19,7 @@ const Features: React.FC = () => {
         </div>
       </div>
 
-      <div className='flex w-[30%] flex-row items-start justify-between'>
+      <div className={`flex ${isMobile ? 'w-[80%] pb-8' : 'w-[30%]'} flex-row items-start justify-between`}>
         <div>
         <BsGraphUpArrow className="text-2xl text-logo" />
         </div>
@@ -27,7 +29,7 @@ const Features: React.FC = () => {
         </div>
       </div>
 
-      <div className='flex w-[30%] flex-row items-start justify-between'>
+      <div className={`flex ${isMobile ? 'w-[80%] pb-8' : 'w-[30%]'} flex-row items-start justify-between`}>
         <div>
         <IoIosRocket className="text-2xl text-logo"  />
         </div>
