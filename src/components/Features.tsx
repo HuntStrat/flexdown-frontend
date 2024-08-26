@@ -7,7 +7,7 @@ import { useWindowResize } from '@/utils/windowResize';
 const Features: React.FC = () => {
     const isMobile = useWindowResize();
   return (
-    <div className={`w-full h-auto flex ${isMobile ? 'flex-col' : 'flex-row'} items-center justify-around bg-white font-lexend`}>
+    <div className={`w-full h-auto flex ${isMobile ? 'flex-col' : 'flex-row'} pb-8 items-center justify-around bg-white font-lexend`}>
  
       <div className={`flex ${isMobile ? 'w-[80%] pb-8' : 'w-[30%]'} flex-row items-start justify-between`}>
         <div>
