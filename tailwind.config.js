@@ -17,6 +17,8 @@ module.exports = {
       'linkedin' : '#0077B5',
       'black': '#000000',
       'grayy' : '#888',
+      'white' : '#FFF',
+      'logo': '#3258a3',
       
             },
     container: {
@@ -31,6 +33,13 @@ module.exports = {
       
     },
     extend: {
+      fontFamily: {
+        sans: ['Source Sans Pro', 'sans-serif'],
+        lexend: ['Lexend', 'sans-serif'],
+      },
+      backgroundImage: {
+        'real-estate-background': "url('/src/assets/images/real-estate.jpg')",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
