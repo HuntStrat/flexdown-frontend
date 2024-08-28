@@ -6,7 +6,7 @@ import { useWindowResize } from '@/utils/windowResize';
 const GoodHands: React.FC = () => {
     const isMobile = useWindowResize();
   return (
-    <div className={`w-full ${isMobile ? 'h-[40vh]' : 'h-[80vh]'} flex items-center justify-center bg-white`}>
+    <div className={`w-full h-[50vh] md:h-[80vh] flex items-center justify-center bg-white`}>
     <div className="flex items-center w-full">
       <div className="w-1/2 h-full">
         {/* Styling for the image with specific border radius */}

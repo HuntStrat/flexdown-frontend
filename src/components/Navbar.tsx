@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
   return (
     <div className="flex justify-between items-center w-3/4 absolute top-0 py-8">
       {/* Logo */}
-      <div className="logo flex items-center">
+      <div className="logo flex items-center ">
         <img src={Logo} alt="Company Logo" className="h-12 rounded-md" />
       </div>
       {isMobile ? (
