@@ -1,9 +1,9 @@
 import React from 'react';
 import { FaArrowRight } from "react-icons/fa";
 import Navbar from './Navbar';
-import { useWindowResize } from '@/utils/windowResize';
+
 const Header: React.FC = () => {
-  const isMobile = useWindowResize();
+ 
   return (
     <header className="bg-real-estate-background relative h-[70vh] bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center font-lexend ">
       {/* Navbar */}
