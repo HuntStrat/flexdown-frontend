@@ -17,8 +17,10 @@ module.exports = {
       'linkedin' : '#0077B5',
       'black': '#000000',
       'grayy' : '#888',
-      'white' : '#FFF',
+      'white' : '#ffffff',
+      'black': '#000000',
       'logo': '#3258a3',
+      'purple': '#702dda',
       
             },
     container: {

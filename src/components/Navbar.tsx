@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { IoMenu } from 'react-icons/io5';
-import Logo from '../assets/images/logo/FlexDown Main Logo.png';
+import Logo from '../assets/images/logo/FlexDown-logo.png';
 import { useWindowResize } from '@/utils/windowResize';
 
 const Navbar: React.FC = () => {
@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
       {isMobile ? (
         <>
           {/* Mobile Menu Icon */}
-          <IoMenu className="text-4xl cursor-pointer text-logo" onClick={toggleMenu} />
+          <IoMenu className="text-4xl cursor-pointer text-white" onClick={toggleMenu} />
           {/* Mobile Menu */}
           {isMenuOpen && (
             <nav className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 p-4">
@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
                   key={href}
                   href={href}
                   onClick={closeMenu}
-                  className="text-logo  text-l hover:font-bold hover:bg-opacity-200 px-4 py-2 rounded"
+                  className="text-black  text-l hover:font-bold hover:bg-opacity-200 px-4 py-2 rounded"
                 >
                   {label}
                 </a>
@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
           )}
         </>
       ) : (
-        <nav className="flex space-x-4 font-bold text-logo">
+        <nav className="flex space-x-4 font-bold text-white">
           {menuItems.map(({ href, label }) => (
             <a key={href} href={href}>
               {label}
