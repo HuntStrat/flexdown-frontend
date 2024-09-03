@@ -20,7 +20,8 @@ const Header: React.FC = () => {
 
   <div className=' mt-8 h-[10vh]'>
   <h2 className="text-3xl text-white font-lexend pr-16">
-          Sync your listings with Zillow 🔥, Hunt's
+  Keep your sales team on top of every opportunity. FlexDown CRM 🔥
+  (Sync your listings with FlexDown chnages to this )
         </h2>
         <p className='text-white mt-2'>Flexible, Affordable, and Hassle-Free Living Solutions at Your Fingertips</p>
     
