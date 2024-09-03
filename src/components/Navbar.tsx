@@ -1,9 +1,10 @@
 // src/components/Navbar.tsx
-
 import React, { useState } from 'react';
 import { IoMenu } from 'react-icons/io5';
-import Logo from '../assets/images/logo/FlexDown Main Logo.png';
+import Logo from '../assets/images/logo/FlexDown-logo.png';
 import { useWindowResize } from '@/utils/windowResize';
+import { IoPersonAddSharp } from "react-icons/io5";
+import { IoPersonSharp } from "react-icons/io5";
 
 const Navbar: React.FC = () => {
   const isMobile = useWindowResize();
@@ -16,23 +17,22 @@ const Navbar: React.FC = () => {
     { href: '#flexdown', label: 'FlexDown' },
     { href: '#packages', label: 'Packages' },
     { href: '#analytics', label: 'Analytics' },
-    { href: '#marketing', label: 'Marketing' },
     { href: '#faq', label: 'FAQ' },
     { href: '#about-us', label: 'About Us' },
   ];
 
   return (
-    <div className="flex justify-between items-center w-3/4 absolute top-0 py-8">
+    <div className="flex justify-between items-center w-[90%] md:w-[80%] absolute top-0 py-8 px-2">
       {/* Logo */}
 
       <div className="logo flex items-center ">
         <img src={Logo} alt="Company Logo" className="h-12 rounded-md" />
       </div>
       {isMobile ? (
-        <>
-          {/* Mobile Menu Icon */}
-          <IoMenu className="text-4xl cursor-pointer text-logo" onClick={toggleMenu} />
-          {/* Mobile Menu */}
+        <div>
+      
+          <IoMenu className="text-4xl cursor-pointer text-white" onClick={toggleMenu} />
+        
           {isMenuOpen && (
             <nav className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 p-4">
               {menuItems.map(({ href, label }) => (
@@ -40,16 +40,16 @@ const Navbar: React.FC = () => {
                   key={href}
                   href={href}
                   onClick={closeMenu}
-                  className="text-logo  text-l hover:font-bold hover:bg-opacity-200 px-4 py-2 rounded"
+                  className="text-black  text-l hover:font-bold hover:bg-opacity-200 px-4 py-2 rounded"
                 >
                   {label}
                 </a>
               ))}
             </nav>
           )}
-        </>
+        </div>
       ) : (
-        <nav className="flex space-x-4 font-bold text-logo">
+        <nav className="flex space-x-4 font-bold text-white">
           {menuItems.map(({ href, label }) => (
             <a key={href} href={href}>
               {label}
@@ -57,6 +57,26 @@ const Navbar: React.FC = () => {
           ))}
         </nav>
       )}
+
+
+
+<div className='text-white w-[15%] font-bold flex items-center justify-between'>
+  {/* Login Button */}
+  <a className='flex items-end justify-between' href="login">
+ 
+    <span className="text-xl block md:hidden"><IoPersonSharp /></span> 
+ 
+    <span className="hidden md:block">Login</span>
+  </a>
+  
+  {/* Signup Button */}
+  <a className='flex items-center justify-between' href="signup">
+
+    <span className="text-xl block md:hidden"><IoPersonAddSharp /></span> 
+  
+    <span className="hidden md:block">Sign Up</span>
+  </a>
+</div>
     </div>
   );
 };
