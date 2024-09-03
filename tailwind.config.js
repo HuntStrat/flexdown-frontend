@@ -16,7 +16,7 @@ module.exports = {
       'mail': '#DB4437',
       'linkedin' : '#0077B5',
       'black': '#000000',
-      'grayy' : '#888',
+      'gray' : '#888',
       'white' : '#ffffff',
       'black': '#000000',
       'logo': '#3258a3',
@@ -51,10 +51,15 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "color-cycle": {
+          '0%, 100%': { color: '#ffffff' },
+          '50%': { color: '#702dda' },  // Ensure colors match those defined above
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "color-cycle": "color-cycle 5s infinite",
       },
     },
   },
