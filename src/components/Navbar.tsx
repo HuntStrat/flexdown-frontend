@@ -5,6 +5,7 @@ import Logo from '../assets/images/logo/FlexDown-logo.png';
 import { useWindowResize } from '@/utils/windowResize';
 import { IoPersonAddSharp } from "react-icons/io5";
 import { IoPersonSharp } from "react-icons/io5";
+import { Link } from 'react-router-dom'; 
 
 const Navbar: React.FC = () => {
   const isMobile = useWindowResize();
@@ -70,12 +71,10 @@ const Navbar: React.FC = () => {
   </a>
   
   {/* Signup Button */}
-  <a className='flex items-center justify-between' href="signup">
-
-    <span className="text-xl block md:hidden"><IoPersonAddSharp /></span> 
-  
-    <span className="hidden md:block">Sign Up</span>
-  </a>
+  <Link className='flex items-center justify-between' to="/signup">
+          <span className="text-xl block md:hidden"><IoPersonAddSharp /></span>
+          <span className="hidden md:block">Sign Up</span>
+        </Link>
 </div>
     </div>
   );
