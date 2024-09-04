@@ -13,7 +13,7 @@ const Login: React.FC = () => {
 
 
       <div className="w-full md:w-1/2 h-full flex flex-col items-center justify-around">
-        <div className="p-4 h-[80vh] md:w-[80%] flex flex-col justify-around">
+        <div className="p-4 h-[90vh] md:w-[80%] flex flex-col justify-around">
           <h1 className="text-3xl font-bold text-center">Login</h1>
           <span className="text-center">Enter your email and password to Login.</span>
           <div>
@@ -41,8 +41,8 @@ const Login: React.FC = () => {
             </a>
           </span>
 
-          <div className="flex flex-col">
-            <button className="rounded-lg bg-black font-lexend text-white p-4 md:px-16 drop-shadow-xl md:mb-16">
+          <div className="h-[30vh] flex flex-col justify-between">
+            <button className="rounded-lg bg-black font-lexend text-white p-4 md:px-16 drop-shadow-xl md:mb-0">
               Sign Up
             </button>
 
@@ -53,6 +53,10 @@ const Login: React.FC = () => {
               </span>
 
               <span>Forgot Password</span>
+            </div>
+
+            <div className='text-center'>
+              <a className='text-purple' href="/signup">Not registered? <span className='text-black'>Create account</span></a>
             </div>
           </div>
         </div>
