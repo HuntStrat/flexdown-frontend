@@ -21,15 +21,15 @@ const SignUp: React.FC = () => {
               />
             </div>
 
-            <div className='mb-4'>
-              <input type='checkbox' id='terms' required />
+            <div className='mb-8'>
+              <input className='mr-2' type='checkbox' id='terms' required />
               <label htmlFor='terms'>
                 I agree with the <a className='underline decoration-purple' href=''>Terms and Conditions</a>
               </label>
             </div>
 
             <div className='flex flex-col'>
-              <button type='submit' className='rounded-lg bg-black font-lexend text-white p-4 md:px-16 drop-shadow-xl md:mb-16'>
+              <button type='submit' className='rounded-lg bg-black font-lexend text-white p-4 md:px-16 drop-shadow-xl mt-8 md:mb-16'>
                 REGISTER NOW
               </button>
 
