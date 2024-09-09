@@ -4,8 +4,8 @@ import './App.css'
 import '@fontsource/lexend';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../src/pages/Home'
-import SignUp from './pages/utils/SignUp';
-import Login from './pages/utils/Login';
+import SignUp from './pages/auth/SignUp';
+import Login from './pages/auth/Login';
 function App() {
 
 

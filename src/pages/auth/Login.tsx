@@ -1,15 +1,11 @@
 import React from 'react';
-import Image from '../../assets/images/login.jpg';
+import Image from '../../assets/images/signup.jpg';
 
 const Login: React.FC = () => {
   return (
     <div className="h-screen w-full p-8 md:flex justify-between items-center font-lexend">
 
-<div className="hidden w-0 md:block md:w-1/2">
-        <div className="p-4 bg-white ">
-          <img src={Image} alt="Login" className="w-full h-auto rounded-lg" />
-        </div>
-      </div>
+
 
 
       <div className="w-full md:w-1/2 h-full flex flex-col items-center justify-around">
@@ -19,7 +15,7 @@ const Login: React.FC = () => {
           <div>
             <span>Your Email</span>
             <input
-              className="w-[90%] md:w-[100%] p-2 border-2 rounded-md focus:border-purple-500"
+              className="w-full md:w-[100%] p-2 border-2 rounded-md focus:border-purple-500"
               aria-label="Your Email"
               type="text"
             />
@@ -28,7 +24,7 @@ const Login: React.FC = () => {
           <div>
             <span>Password</span>
             <input
-              className="w-[90%] md:w-[100%] p-2 border-2 rounded-md focus:border-purple-500"
+              className="w-full md:w-[100%] p-2 border-2 rounded-md focus:border-purple-500"
               aria-label="Password"
               type="text"
             />
@@ -62,6 +58,11 @@ const Login: React.FC = () => {
         </div>
       </div>
 
+      <div className="hidden w-0 md:block md:w-1/2">
+        <div className="p-4 bg-white ">
+          <img src={Image} alt="Login" className="w-full h-auto rounded-lg" />
+        </div>
+      </div>
     
     </div>
   );
