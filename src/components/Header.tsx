@@ -3,7 +3,8 @@ import Navbar from './Navbar';
 import { useState, useEffect } from 'react';
 
 const Header: React.FC = () => {
-  const [text, setText] = useState('Sync your listings with FlexDown 🔥');
+  const [text, setText] = useState('Sync your listings with FlexDown 🔥')
+
 const messages = [ 'Keep your sales team on top of every opportunity. FlexDown CRM 🔥',
   "Sync your listings with FlexDown 🔥",]
 
