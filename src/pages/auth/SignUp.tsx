@@ -1,5 +1,6 @@
 import React from 'react';
-import Image from '../../assets/images/signup.jpg';
+import Image from '../../assets/images/signup.jpg'
+
 
 const SignUp: React.FC = () => {
   return (
@@ -46,8 +47,9 @@ const SignUp: React.FC = () => {
           <img src={Image} alt='Sign Up' className='w-full h-auto rounded-lg' />
         </div>
       </div>
-    </div>
+
   );
 };
+
 
 export default SignUp;
