@@ -13,6 +13,7 @@
     "@fontsource/lexend": "^5.0.21",
     "@fontsource/source-sans-pro": "^5.0.8",
     "@radix-ui/react-slider": "^1.2.0",
+    "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.424.0",
