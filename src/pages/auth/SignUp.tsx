@@ -1,46 +1,68 @@
 import React from 'react';
 import Image from '../../assets/images/signup.jpg'
-
-
+import { useState } from 'react';
+import BuyerForm from './signup/BuyerForm';
+import SellerForm from './signup/SellerForm';
 const SignUp: React.FC = () => {
+  const [selectedForm, setSelectedForm] = useState<'buyer' | 'seller' | null>(null);
+
+
+  const handleBuyerClick = () => {
+    setSelectedForm('buyer');
+  };
+
+  const handleSellerClick = () => {
+    setSelectedForm('seller');
+  };
+
+  const handleSwitchToBuyer = () => {
+    setSelectedForm('buyer');
+  };
+
+  const handleSwitchToSeller = () => {
+    setSelectedForm('seller');
+  };
   return (
     <div className='h-screen p-8 flex justify-between items-center font-lexend'>
-      <div className='w-full md:w-1/2 h-full flex flex-col items-center justify-around'>
-        <div className='p-4 h-[80vh] md:w-[80%] flex flex-col justify-around'>
-          <h1 className='text-3xl font-bold text-center'>Sign Up</h1>
-          <span className='text-center'>Enter your email and password to register.</span>
+      <div className='w-full h-[90vh] md:w-1/2 flex flex-col items-center justify-around'>
+        <div className=' h-[100vh] md:w-[100%] flex flex-col justify-around'>
+          <div className='mb-2'>
+          <h1 className='text-3xl font-bold text-center'>  {selectedForm === 'buyer' ? 'Sign Up as Buyer' : selectedForm === 'seller' ? 'Sign Up as Seller' : 'Sign Up As'}</h1>
+          </div>
           
-          <form>
-            <div className='mb-4'>
-              <label className='block mb-2' htmlFor='email'>Your Email</label>
-              <input
-                id='email'
-                className='w-[90%] md:w-[100%] p-2 border-2 rounded-md focus:border-purple-500'
-                aria-label='Your Email'
-                type='email'
-                required
-              />
-            </div>
-
-            <div className='mb-8'>
-              <input className='mr-2' type='checkbox' id='terms' required />
-              <label htmlFor='terms'>
-                I agree with the <a className='underline decoration-purple' href=''>Terms and Conditions</a>
-              </label>
-            </div>
-
-            <div className='flex flex-col'>
-              <button type='submit' className='rounded-lg bg-black font-lexend text-white p-4 md:px-16 drop-shadow-xl mt-8 md:mb-16'>
-                REGISTER NOW
+          {!selectedForm ? (
+            <div className="w-[100%] md:w-[80%] md:ml-8 h-[20vh] flex flex-col md:flex-row items-center justify-between">
+              <button
+                onClick={handleBuyerClick}
+                className="rounded-lg bg-black hover:bg-purple font-lexend text-white p-4 px-32 md:px-24 drop-shadow-xl md:mb-16"
+              >
+                Buyer
               </button>
-
-              <div className='mt-8 text-center'>
-                <a href='/login'>Already have an account? <span className='underline'>Login</span></a>
-              </div>
+              <button
+                onClick={handleSellerClick}
+                className="rounded-lg bg-black hover:bg-purple font-lexend text-white p-4 px-32 md:px-24 drop-shadow-xl md:mb-16"
+              >
+                Seller
+              </button>
             </div>
-          </form>
+
+            
+          ) : selectedForm === 'buyer' ? (
+            <BuyerForm  onSwitch={handleSwitchToSeller} /> 
+          ) : (
+            <SellerForm onSwitch={handleSwitchToBuyer}/> 
+          )}
+
+<div className='mt-8 text-center'>
+                <a href='/login'>Already have an account ? <span className='underline text-purple font-bold'>Login</span></a>
+              </div>
+         
         </div>
+
+        
       </div>
+
+  
 
       <div className='hidden w-0 md:block md:w-1/2'>
         <div className='p-4 bg-white'>
