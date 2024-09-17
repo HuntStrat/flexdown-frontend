@@ -23,24 +23,24 @@ const SignUp: React.FC = () => {
     setSelectedForm('seller');
   };
   return (
-    <div className='h-screen p-8 flex justify-between items-center font-lexend'>
-      <div className='w-full h-[90vh] md:w-1/2 flex flex-col items-center justify-around'>
-        <div className=' h-[100vh] md:w-[100%] flex flex-col justify-around'>
+    <div className='h-screen w-full p-8 flex justify-between items-center font-lexend'>
+      <div className='w-full md:w-1/2 h-[90vh] flex flex-col items-center justify-around'>
+        <div className=' h-[100vh] md:w-[100%] flex flex-col justify-around items-center'>
           <div className='mb-2'>
           <h1 className='text-3xl font-bold text-center'>  {selectedForm === 'buyer' ? 'Sign Up as Buyer' : selectedForm === 'seller' ? 'Sign Up as Seller' : 'Sign Up As'}</h1>
           </div>
           
           {!selectedForm ? (
-            <div className="w-[100%] md:w-[80%] md:ml-8 h-[20vh] flex flex-col md:flex-row items-center justify-between">
+            <div className="w-[100%]  h-[20vh] flex flex-col md:flex-row items-center justify-around">
               <button
                 onClick={handleBuyerClick}
-                className="rounded-lg bg-black hover:bg-purple font-lexend text-white p-4 px-32 md:px-24 drop-shadow-xl md:mb-16"
+                className="rounded-lg bg-black hover:bg-purple font-lexend text-white p-4 px-32 md:px-24 drop-shadow-xl md:mb-8"
               >
                 Buyer
               </button>
               <button
                 onClick={handleSellerClick}
-                className="rounded-lg bg-black hover:bg-purple font-lexend text-white p-4 px-32 md:px-24 drop-shadow-xl md:mb-16"
+                className="rounded-lg bg-black hover:bg-purple font-lexend text-white p-4 px-32 md:px-24 drop-shadow-xl md:mb-8"
               >
                 Seller
               </button>
