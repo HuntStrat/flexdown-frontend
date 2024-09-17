@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import Image from '../../assets/images/signup.jpg';
 
 const Login: React.FC = () => {
+  const navigate = useNavigate()
   const [subscribe, setSubscribe] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,6 +35,7 @@ const Login: React.FC = () => {
   
       const data = await response.json();
       console.log('Login successful:', data);
+      navigate('/welcome-user');
       setLoading(false);
     } catch (err: any) {
       setError(err.message || 'Login failed. Please try again.');

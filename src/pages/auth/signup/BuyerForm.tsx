@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 interface BuyerFormProps {
   onSwitch: () => void;
 }
 
 const BuyerForm: React.FC<BuyerFormProps> = ({ onSwitch }) => {
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
-    firstName: '',
+    first_name: '',
     surname: '',
     email: '',
-    ecowasNumber: '',
+    ghana_ecowas_number: '',
     city: '',
-    mobileNumber: '',
-    whatsappNumber: '',
+    mobile_number: '',
+    whatsapp_number: '',
     password: ''
   });
 
@@ -28,12 +29,13 @@ const BuyerForm: React.FC<BuyerFormProps> = ({ onSwitch }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+ 
     setLoading(true);
     setError('');
 
     try {
       const response = await fetch(
-        'https://flexdown.fly.dev/buyer/buyer/pub',
+        'https://flexdown.fly.dev/api/v1/buyer/buyer/pub',
         {
           method: 'POST',
           headers: {
@@ -49,6 +51,7 @@ const BuyerForm: React.FC<BuyerFormProps> = ({ onSwitch }) => {
 
       const data = await response.json();
       console.log('Seller registration successful:', data);
+      navigate('/login');
     } catch (err: any) {
       console.error('Error during registration:', err);
       setError(err.message || 'Signup failed. Please try again.');
@@ -62,7 +65,7 @@ const BuyerForm: React.FC<BuyerFormProps> = ({ onSwitch }) => {
         className="font-bold mb-8 flex justify-end cursor-pointer"
         onClick={onSwitch}
       >
-        Sign Up as <span className="text-purple ml-2">Seller</span>
+        Register As <span className="text-purple ml-2">Seller</span>
       </a>
       <form className='font-bold' onSubmit={handleSubmit}>
         <div className="flex justify-between">
@@ -81,8 +84,8 @@ const BuyerForm: React.FC<BuyerFormProps> = ({ onSwitch }) => {
             <label className="block mb-2">First Name</label>
             <input
               type="text"
-              name="firstName"
-              value={formData.firstName}
+              name="first_name"
+              value={formData.first_name}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded-md"
               required
@@ -104,8 +107,8 @@ const BuyerForm: React.FC<BuyerFormProps> = ({ onSwitch }) => {
           <label className="block mb-2">Ghana/ECOWAS Number</label>
           <input
             type="text"
-            name="ecowasNumber"
-            value={formData.ecowasNumber}
+            name="ghana_ecowas_number"
+            value={formData.ghana_ecowas_number}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-md"
             required
@@ -116,8 +119,8 @@ const BuyerForm: React.FC<BuyerFormProps> = ({ onSwitch }) => {
             <label className="block mb-2">Mobile Number</label>
             <input
               type="text"
-              name="mobileNumber"
-              value={formData.mobileNumber}
+              name="mobile_number"
+              value={formData.mobile_number}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded-md"
               required
@@ -127,8 +130,8 @@ const BuyerForm: React.FC<BuyerFormProps> = ({ onSwitch }) => {
             <label className="block mb-2">WhatsApp Number</label>
             <input
               type="text"
-              name="whatsappNumber"
-              value={formData.whatsappNumber}
+              name="whatsapp_number"
+              value={formData.whatsapp_number}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded-md"
               required

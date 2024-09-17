@@ -7,6 +7,7 @@ import Home from '../src/pages/Home'
 import SignUp from './pages/auth/SignUp';
 import UserForm from './pages/UserForm';
 import Login from './pages/auth/Login';
+import WelcomeUser from './pages/WelcomeUser';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/userform" element={<UserForm />} />
 
           <Route path="/login" element={<Login />} />
+          <Route path="/welcome-user" element={<WelcomeUser />} />
       
         </Routes>
       </BrowserRouter>
