@@ -7,11 +7,11 @@ import { IoIosRocket } from "react-icons/io";
 const Features: React.FC = () => {
 
   return (
-    <div className={`w-full h-auto flex flex-col md:flex-row mt-8 pb-8 items-center justify-around bg-white font-lexend`}>
+    <div className={`flex flex-col md:flex-row mt-8 py-8 items-center justify-around bg-blue-400 font-lexend`}>
  
-      <div className={`flex w-[80%] pb-8 md:w-[30%] flex-row items-start justify-between`}>
+      <div className={`flex w-[80%] pb-8 md:w-[30%] flex-row items-start justify-between  `}>
         <div>
-        <SiVorondesign className="text-2xl text-logo" />
+        <SiVorondesign className="text-lg text-logo" />
         </div>
         <div className='px-8'>
           <h2 className='text-2xl text-logo font-bold mb-2'>Design</h2>

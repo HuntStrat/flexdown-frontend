@@ -2,45 +2,50 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
     colors: {
-      'primary': '#010948',
-      'facebook': '#1877F2',
-      'instagram': '#c5377d',
-      'mail': '#DB4437',
-      'linkedin' : '#0077B5',
-      'black': '#000000',
-      'gray' : '#888',
-      'white' : '#ffffff',
-      'black': '#000000',
-      'logo': '#3258a3',
-      'purple': '#702dda',
-      
-            },
+      primary: "#010948",
+      facebook: "#1877F2",
+      instagram: "#c5377d",
+      mail: "#DB4437",
+      linkedin: "#0077B5",
+      black: "#000000",
+      gray: "#888",
+      white: "#ffffff",
+      black: "#000000",
+      logo: "#3258a3",
+      purple: "#702dda",
+    },
     container: {
       center: true,
 
       screens: {
-        sm: '480px',
-        md: '768px',
-        lg: '976px',
-        xl: '1440px',
+        sm: "480px",
+        md: "768px",
+        lg: "976px",
+        xl: "1440px",
       },
-      
     },
     extend: {
       fontFamily: {
-        sans: ['Source Sans Pro', 'sans-serif'],
-        lexend: ['Lexend', 'sans-serif'],
+        sans: ["Source Sans Pro", "sans-serif"],
+        lexend: ["Lexend", "sans-serif"],
+      },
+      fontSize: {
+        "tx-clamp": "clamp( .8rem, 5vw + 1rem, 1rem)",
       },
       backgroundImage: {
-        'real-estate-background': "url('/src/assets/images/real-estate.jpg')",
+        "real-estate-background": "url('/src/assets/images/real-estate.jpg')",
+        "header-banner": "url('/src/assets/images/houses-main.jpg')",
+        "about-image": "url('/src/assets/images/team.jpg')",
+        "header-Overlay":
+          "linear-gradient(45deg, rgba(0,0,0,0.8) 0%,rgba(225,225,225,0.5) 100% );",
       },
       keyframes: {
         "accordion-down": {
@@ -52,8 +57,8 @@ module.exports = {
           to: { height: "0" },
         },
         "color-cycle": {
-          '0%, 100%': { color: '#ffffff' },
-          '50%': { color: '#702dda' },  // Ensure colors match those defined above
+          "0%, 100%": { color: "#ffffff" },
+          "50%": { color: "#702dda" }, // Ensure colors match those defined above
         },
       },
       animation: {
@@ -64,4 +69,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
