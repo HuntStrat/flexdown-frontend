@@ -25,7 +25,7 @@ const SignUp: React.FC = () => {
   return (
     <div className='h-screen w-full p-4 flex justify-between items-center font-lexend'>
       <div className='w-full md:w-1/2 h-[90vh] flex flex-col items-center justify-around'>
-        <div className=' h-[100vh] md:w-[100%] flex flex-col justify-around items-center'>
+        <div className='w-[100%] h-[100vh] md:w-[100%] flex flex-col justify-around items-center'>
           <div className='mb-2'>
           <h1 className='text-3xl font-bold text-center'>  {selectedForm === 'buyer' ? 'Register As Buyer' : selectedForm === 'seller' ? 'Register As Seller' : 'Register As'}</h1>
           </div>

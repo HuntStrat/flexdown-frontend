@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../../../App.css'
 interface SellerFormProps {
   onSwitch: () => void;
 }
@@ -67,7 +68,7 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
 
   return (
 
-    <div className="w-full h-[60vh] overflow-auto max-w-md bg-gray-100 rounded-lg">
+    <div className="w-full h-[60vh] overflow-auto max-h-[300px] hide-scrollbar max-w-md bg-gray-100 rounded-lg">
       <a className="mb-8 font-bold flex justify-end cursor-pointer" onClick={onSwitch}>
         Register as <span className="text-purple ml-2">Buyer</span>
       </a>
@@ -76,7 +77,7 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
 
       <form className='font-bold' onSubmit={handleSubmit}>
         <div className="flex justify-between">
-          <div className="mb-4">
+          <div className="mb-4 mr-2 md:mr-0">
             <label className="block mb-2">First Name</label>
             <input
               type="text"
@@ -139,7 +140,7 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
         </div>
 
         <div className="flex justify-between">
-          <div className="mb-4">
+          <div className="mb-4 mr-2 md:mr-0">
             <label className="block mb-2">Mobile Number</label>
             <input
               type="text"
@@ -176,7 +177,7 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
         </div>
 
         <div className="flex justify-between">
-          <div className="mb-4">
+          <div className="mb-4 mr-2 md:mr-0">
             <label className="block mb-2">Agency Name</label>
             <input
               type="text"

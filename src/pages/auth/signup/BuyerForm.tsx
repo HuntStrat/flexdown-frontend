@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import '../../../App.css'
 interface BuyerFormProps {
   onSwitch: () => void;
 }
@@ -60,7 +60,7 @@ const BuyerForm: React.FC<BuyerFormProps> = ({ onSwitch }) => {
     }
   };
   return (
-    <div className="w-[100%] h-[60vh] overflow-auto max-w-md bg-gray-100 rounded-lg">
+    <div className="w-[100%] h-[60vh] overflow-auto max-h-[500px] hide-scrollbar max-w-md bg-gray-100 rounded-lg">
       <a
         className="font-bold mb-8 flex justify-end cursor-pointer"
         onClick={onSwitch}
@@ -69,7 +69,7 @@ const BuyerForm: React.FC<BuyerFormProps> = ({ onSwitch }) => {
       </a>
       <form className='font-bold' onSubmit={handleSubmit}>
         <div className="flex justify-between">
-          <div className="mb-4">
+          <div className="mb-4 mr-2 md:mr-0">
             <label className="block mb-2">Surname</label>
             <input
               type="text"
@@ -115,7 +115,7 @@ const BuyerForm: React.FC<BuyerFormProps> = ({ onSwitch }) => {
           />
         </div>
         <div className="flex justify-between">
-          <div className="mb-4">
+          <div className="mb-4 mr-2 md:mr-0">
             <label className="block mb-2">Mobile Number</label>
             <input
               type="text"
