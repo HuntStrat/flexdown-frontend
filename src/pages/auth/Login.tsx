@@ -15,8 +15,7 @@ const Login: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     setError('');
-    console.log('Email:', email);
-    console.log('Password:', password);
+   
   
     try {
       const response = await fetch('https://flexdown.fly.dev/api/v1/sell/login/pub', {
@@ -34,6 +33,7 @@ const Login: React.FC = () => {
       }
   
       const data = await response.json();
+      localStorage.setItem('user', JSON.stringify(data));
       console.log('Login successful:', data);
       navigate('/welcome-user');
       setLoading(false);
@@ -80,7 +80,7 @@ const Login: React.FC = () => {
             </div>
 
             <div className="mb-4">
-              <input className='mr-2' type="checkbox" id="subscribe" checked={subscribe}  onChange={(e) => setSubscribe(e.target.checked)}  required />
+              <input className='mr-2' type="checkbox" id="agreement" checked={subscribe}  onChange={(e) => setSubscribe(e.target.checked)}  required />
               <label htmlFor="terms">
                 I agree with the <a className="underline decoration-purple" href="">Terms and Conditions</a>
               </label>
