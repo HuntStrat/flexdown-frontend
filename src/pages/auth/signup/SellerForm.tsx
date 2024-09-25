@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import '../../../App.css'
 interface SellerFormProps {
   onSwitch: () => void;
 }
 
 const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
+    const navigate = useNavigate()
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
-    firstName: '',
+    first_name: '',
     surname: '',
     email: '',
-    ecowasNumber: '',
+    ghana_ecowas_number: '',
     city: '',
-    mobileNumber: '',
-    whatsappNumber: '',
+    mobile_number: '',
+    whatsapp_number: '',
     password: '',
-    agencyName: '',
-    licenseNumber: '',
+    agency_name: '',
+    license_number: '',
     bio: '',
     rating: '',
   });
@@ -42,7 +44,10 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formData), 
+          body: JSON.stringify({
+            ...formData,
+            rating: parseFloat(formData.rating), // Ensure rating is a number
+          }),
         }
       );
 
@@ -52,6 +57,7 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
 
       const data = await response.json();
       console.log('Seller registration successful:', data);
+      navigate('/login')
     } catch (err: any) {
       console.error('Error during registration:', err);
       setError(err.message || 'Signup failed. Please try again.');
@@ -62,21 +68,21 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
 
   return (
 
-    <div className="w-full h-[60vh] overflow-auto max-w-md bg-gray-100 rounded-lg">
+    <div className="w-full h-[60vh] overflow-auto max-h-[300px] hide-scrollbar max-w-md bg-gray-100 rounded-lg">
       <a className="mb-8 font-bold flex justify-end cursor-pointer" onClick={onSwitch}>
-        Sign Up as <span className="text-purple ml-2">Buyer</span>
+        Register as <span className="text-purple ml-2">Buyer</span>
       </a>
 
       {error && <div className="text-red-500 mb-4">{error}</div>}
 
       <form className='font-bold' onSubmit={handleSubmit}>
         <div className="flex justify-between">
-          <div className="mb-4">
+          <div className="mb-4 mr-2 md:mr-0">
             <label className="block mb-2">First Name</label>
             <input
               type="text"
-              name="firstName"
-              value={formData.firstName}
+              name="first_name"
+              value={formData.first_name}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded-md "
               required
@@ -112,8 +118,8 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
             <label className="block mb-2">Ghana/ECOWAS Number</label>
             <input
               type="text"
-              name="ecowasNumber"
-              value={formData.ecowasNumber}
+              name="ghana_ecowas_number"
+              value={formData.ghana_ecowas_number}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded-md"
               required
@@ -134,12 +140,12 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
         </div>
 
         <div className="flex justify-between">
-          <div className="mb-4">
+          <div className="mb-4 mr-2 md:mr-0">
             <label className="block mb-2">Mobile Number</label>
             <input
               type="text"
-              name="mobileNumber"
-              value={formData.mobileNumber}
+              name="mobile_number"
+              value={formData.mobile_number}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded-md"
               required
@@ -149,8 +155,8 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
             <label className="block mb-2">WhatsApp Number</label>
             <input
               type="text"
-              name="whatsappNumber"
-              value={formData.whatsappNumber}
+              name="whatsapp_number"
+              value={formData.whatsapp_number}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded-md"
               required
@@ -171,12 +177,12 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
         </div>
 
         <div className="flex justify-between">
-          <div className="mb-4">
+          <div className="mb-4 mr-2 md:mr-0">
             <label className="block mb-2">Agency Name</label>
             <input
               type="text"
-              name="agencyName"
-              value={formData.agencyName}
+              name="agency_name"
+              value={formData.agency_name}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded-md"
             />
@@ -185,8 +191,8 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
             <label className="block mb-2">License Number</label>
             <input
               type="text"
-              name="licenseNumber"
-              value={formData.licenseNumber}
+              name="license_number"
+              value={formData.license_number}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded-md"
             />
