@@ -15,11 +15,9 @@ const Login: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     setError('');
-    console.log('Email:', email);
-    console.log('Password:', password);
-  
+    
     try {
-      const response = await fetch('https://flexdown.fly.dev/api/v1/sell/login/pub', {
+      const response: Response = await fetch('https://flexdown.fly.dev/api/v1/sell/login/pub', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,6 +33,23 @@ const Login: React.FC = () => {
   
       const data = await response.json();
       console.log('Login successful:', data);
+  
+      // Destructure token and email, but do not use id or role
+      const { token, email: userEmail } = data.data;
+  
+      // Cleaned up data object
+      const cleanedData = {
+        token,
+        email: userEmail,
+      };
+  
+      console.log('Cleaned data:', cleanedData); // Log the cleaned data
+  
+      // Store only the necessary information in local storage
+      localStorage.setItem('token', token);
+      localStorage.setItem('email', userEmail); // Optional, store email as well
+  
+      // Redirect user
       navigate('/welcome-user');
       setLoading(false);
     } catch (err: any) {
