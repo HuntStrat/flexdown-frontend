@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.13.0",
+    "@cloudinary/url-gen": "^1.21.0",
     "@fontsource/lexend": "^5.0.21",
     "@fontsource/source-sans-pro": "^5.0.8",
     "@radix-ui/react-slider": "^1.2.0",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
+    "cloudinary-core": "^2.13.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.424.0",
     "react": "^18.3.1",

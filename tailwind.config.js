@@ -17,6 +17,7 @@ module.exports = {
       'linkedin' : '#0077B5',
       'black': '#000000',
       'gray' : '#888',
+      "light-gray" : '#f2f4f8',
       'white' : '#ffffff',
       'black': '#000000',
       'logo': '#3258a3',
