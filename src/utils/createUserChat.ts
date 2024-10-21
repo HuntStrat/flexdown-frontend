@@ -1,22 +1,22 @@
-import { StreamChat } from 'stream-chat';
+// import { StreamChat } from 'stream-chat';
 
-const apiKey = 'dz5f4d5kzrue';
+// const apiKey = 'dz5f4d5kzrue';
 
-export const createUser = (userId: string, userName: string) => {
-  const client = StreamChat.getInstance(apiKey);
+// export const createUser = (userId: string, userName: string) => {
+//   const client = StreamChat.getInstance(apiKey);
 
-  // Generate a development token
-  const userToken = client.devToken(userId);
+//   // Generate a development token
+//   const userToken = client.devToken(userId);
 
-  return {
-    client,
-    user: {
-      id: userId,
-      name: userName,
-    },
-    userToken,
-  };
-};
+//   return {
+//     client,
+//     user: {
+//       id: userId,
+//       name: userName,
+//     },
+//     userToken,
+//   };
+// };
 
 
 // export const createUser = async (userId: string, userName: string) => {

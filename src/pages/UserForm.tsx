@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { uploadImageToCloudinary } from '../lib/cloudinary';
+
 
 // Define the type for the form data
 interface PropertyFormData {
@@ -19,7 +19,7 @@ interface PropertyFormData {
   bathrooms: number;
   square_feet: number;
   description: string;
-  images: string | null;
+  image: File | null;
 }
 
 const PropertyForm: React.FC = () => {
@@ -40,9 +40,9 @@ const PropertyForm: React.FC = () => {
     bathrooms: 0,
     square_feet: 0,
     description: '',
-    images: null,
+    image: null,
   });
-
+  const [loading, setLoading] = useState(false);
   // Handle input change
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -56,40 +56,54 @@ const PropertyForm: React.FC = () => {
 
   // Handle file change for images
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      try {
-        const uploadedImage = await uploadImageToCloudinary(file);
-        setFormData((prevState) => ({
-          ...prevState,
-          images: uploadedImage.secure_url, // Store the Cloudinary image URL
-        }));
-      } catch (error) {
-        console.error('Error uploading image:', error);
-      }
+    const file = e.target.files?.[0];
+    if (file) {
+      setFormData((prevState) => ({
+        ...prevState,
+        image: file, // Save the file in the state
+      }));
     }
   };
-
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
-    // Log the form data to the console
-    console.log('Form Data:', formData);
-  
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value.toString());
-    });
 
-    // Example API request (replace URL with your actual API endpoint)
-    fetch(`https://api.cloudinary.com/v1_1/dqiznt9zd/image/upload`, {
-      method: 'POST',
-      body: formDataToSend,
-    })
-      .then((response) => response.json())
-      .then((data) => console.log('Property created:', data))
-      .catch((error) => console.error('Error:', error));
+    // Ensure image is included in the form data
+    const formDataToSend = new FormData() ;
+
+    Object.entries(formData).forEach(([key, value]) => {
+      if (key === 'image' && value) {
+        formDataToSend.append(key, value); // Append file
+      } else {
+        formDataToSend.append(key, String(value)); // Append other fields as strings
+      }
+    });
+    try {
+      setLoading(true);
+
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZpbGlwdEBnbWFpbC5jb20iLCJyb2xlIjoic2VsbGVyIiwiaWQiOjIxLCJpYXQiOjE3Mjk1NDc1MjAsImV4cCI6MTcyOTYzMzkyMH0.-i__Tyai7COkBoLZS4b48dvTt3fdVr5pQ08RlLHn0Pk'
+      console.log('Retrieved token:', token);
+      const response = await fetch('https://flexdown.fly.dev/api/v1/property/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: formDataToSend,
+      });
+
+      const data = await response.json();
+      console.log('Property created:', data);
+      setLoading(false);
+      if (data.status === 'error') {
+        console.error('Error:', data.message);
+      } else {
+        // Handle successful property creation
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -102,13 +116,22 @@ const PropertyForm: React.FC = () => {
           {/* Category */}
           <div className="flex flex-col mb-2 ">
             <label className="text-sm font-medium">Category</label>
-            <input
-              type="text"
-              name="category"
+            <select
+              name="sale_type"
               value={formData.category}
               onChange={handleChange}
               className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            />
+            >
+              
+              <option value="comercial">comercial</option>
+              <option value="condos">condos</option>
+              <option value="studios">studios</option>
+              <option value="single homes">single homes</option>
+              <option value="residental">residental</option>
+              <option value="apartment">apartment</option>
+             
+            </select>
+
           </div>
 
           {/* Sale Type */}
@@ -120,9 +143,12 @@ const PropertyForm: React.FC = () => {
               onChange={handleChange}
               className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
-              <option value="">Select Sale Type</option>
-              <option value="sale">Sale</option>
-              <option value="rent">Rent</option>
+     
+              <option value="for sale">for sale</option>
+              <option value="for rent">for rent</option>
+              <option value="rent to own">rent to own</option>
+              <option value="short term">short term</option>
+             
             </select>
           </div>
 
@@ -130,24 +156,56 @@ const PropertyForm: React.FC = () => {
           {/* Repeat similar structure for other inputs */}
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Status</label>
-            <input
-              type="text"
-              name="status"
+            <select
+              name="sale_type"
               value={formData.status}
               onChange={handleChange}
               className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            />
+            >
+         
+              <option value="open house">open house</option>
+              <option value="active">active</option>
+              <option value="sold">sold</option>
+             
+             
+            </select>
           </div>
 
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Payment Plan</label>
-            <input
-              type="text"
-              name="payment_plan"
+            <select
+              name="sale_type"
               value={formData.payment_plan}
               onChange={handleChange}
               className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            />
+            >
+           
+              <option value="monthly">monthly </option>
+              <option value="yearly">yearly</option>
+              <option value="not applicable">not applicable</option>
+              <option value="one time">one time</option>
+             
+             
+            </select>
+          </div>
+
+
+          <div className="flex flex-col mb-2">
+            <label className="text-sm font-medium">Mode of Payment</label>
+            <select
+              name="sale_type"
+              value={formData.mode_of_payment}
+              onChange={handleChange}
+              className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              
+              <option value="cash">cash </option>
+              <option value="card">card</option>
+              <option value="not applicable">not applicable</option>
+              <option value="bank transfer">bank transfer</option>
+             
+             
+            </select>
           </div>
 
           {/* Price */}
@@ -221,21 +279,23 @@ const PropertyForm: React.FC = () => {
   />
 </div>
 
-{formData.images && (
+{formData.image && (
   <div className='flex flex-col mb-2'>
     <label className="text-sm font-medium">Images</label>
-    <img src={formData.images} alt="Uploaded" className="w-64 h-64 object-cover" />
+    <img src={URL.createObjectURL(formData.image)} alt="Uploaded" className="w-64 h-64 object-cover" />
   </div>
 )}
          
         </div>
         <div className="flex justify-center p-4 w-full">
           <button
-            onClick={handleSubmit}
+           
             type="submit"
+            disabled={loading}
             className="w-full mt-4 bg-black text-white py-3 px-4 rounded-xl hover:bg-indigo-700"
           >
-            Submit Listing
+           
+            {loading ? 'Submitting...' : 'Submit Listing'}
           </button>
         </div>
       </form>

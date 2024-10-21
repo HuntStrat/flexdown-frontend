@@ -1,34 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { Chat } from 'stream-chat-react';
-import { createUser } from '../utils/createUserChat';
-import Messenger from '../components/Messanger'; // Import Messenger
+// import React, { useEffect, useState } from 'react';
+// import { Chat } from 'stream-chat-react';
+// import { createUser } from '../utils/createUserChat';
+// import Messenger from '../components/Messanger'; // Import Messenger
 
-const userId: string = 'delicate-pond-6';
-const userName: string = 'delicate';
+// const userId: string = 'delicate-pond-6';
+// const userName: string = 'delicate';
 
-const CreateUser: React.FC = () => {
-  const [isConnected, setIsConnected] = useState(false);
-  const { client, user, userToken } = createUser(userId, userName);
+// const CreateUser: React.FC = () => {
+//   const [isConnected, setIsConnected] = useState(false);
+//   const { client, user, userToken } = createUser(userId, userName);
 
-  useEffect(() => {
-    const connectUser = async () => {
-      await client.connectUser(user, userToken);
-      setIsConnected(true);
-    };
+//   useEffect(() => {
+//     const connectUser = async () => {
+//       await client.connectUser(user, userToken);
+//       setIsConnected(true);
+//     };
   
-    connectUser();
+//     connectUser();
   
-    return () => {
-      client.disconnectUser(); // Make sure this function is synchronous
-    };
-  }, [client, user, userToken]);
-  if (!isConnected) return <div>Setting up client & connection...</div>;
+//     return () => {
+//       client.disconnectUser(); // Make sure this function is synchronous
+//     };
+//   }, [client, user, userToken]);
+//   if (!isConnected) return <div>Setting up client & connection...</div>;
 
-  return (
-    <Chat client={client}>
-      <Messenger /> 
-    </Chat>
-  );
-};
+//   return (
+//     <Chat client={client}>
+//       <Messenger /> 
+//     </Chat>
+//   );
+// };
 
-export default CreateUser;
+// export default CreateUser;
