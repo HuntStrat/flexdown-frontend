@@ -21,7 +21,6 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
     agency_name: '',
     license_number: '',
     bio: '',
-    rating: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +45,7 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
           },
           body: JSON.stringify({
             ...formData,
-            rating: parseFloat(formData.rating), // Ensure rating is a number
+             // Ensure rating is a number
           }),
         }
       );
@@ -210,7 +209,7 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
           />
         </div>
 
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block mb-2">Rating</label>
           <input
             type="text"
@@ -219,7 +218,7 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-md"
           />
-        </div>
+        </div> */}
 
         <div className='flex justify-center items-center'>
           <button
