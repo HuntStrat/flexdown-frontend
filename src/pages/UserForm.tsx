@@ -393,7 +393,7 @@ interface PropertyFormData {
   bathrooms: number;
   square_feet: number;
   description: string;
-
+  image: File[] | null; // Changed to array of Files
 }
 
 const PropertyForm: React.FC = () => {
@@ -415,9 +415,11 @@ const PropertyForm: React.FC = () => {
     bathrooms: 0,
     square_feet: 0,
     description: '',
-   
+    image: null, // Initialize as null
   });
-  const [images, setImages] = useState<File[]>([]);
+
+
+  // const [image, setImage] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
 
 
@@ -435,38 +437,92 @@ const PropertyForm: React.FC = () => {
   };
 
   // Handle file change for images
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const files = e.target.files;
+  //   if (files) {
+  //     const fileArray = Array.from(files); // Convert FileList to an array
+  //     setFormData((prevState) => ({
+  //       ...prevState,
+  //       images: fileArray, // Save the files in the state
+  //     }));
+  //   }
+  // };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
-      const fileArray = Array.from(files); // Convert FileList to an array
+      const fileArray = Array.from(files);
       setFormData((prevState) => ({
         ...prevState,
-        images: fileArray, // Save the files in the state
+        image: fileArray,
       }));
     }
   };
 
   // Handle form submission
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   // Ensure image is included in the form data
+  //   const formDataToSend = new FormData();
+
+  //     Object.entries(formData).forEach(([key, value]) => {
+  //       if (key === 'image' && Array.isArray(value)) {
+  //         value.forEach((file) => {
+  //           formDataToSend.append('images', file); // Use the correct key
+  //         });
+  //       } else {
+  //         formDataToSend.append(key, String(value)); // Append other fields as strings
+  //       }
+  //     });
+
+  //   try {
+  //     setLoading(true);
+  //     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtY2UxMjNAZ21haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlkIjoyNywiaWF0IjoxNzI5Nzc2Nzc1LCJleHAiOjE3Mjk4NjMxNzV9.w2ndq7rnb-0ihIPLDSGdUE43O8NGielfhytHAUVBRQE'; // Replace with your actual token
+
+  //     const response = await fetch('https://flexdown.fly.dev/api/v1/property/create', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Authorization': `Bearer ${token}`,
+  //       },
+  //       body: formDataToSend,
+  //     });
+
+  //     const data = await response.json();
+  //     setLoading(false);
+
+  //     if (data.status === 'error') {
+  //       console.error('Error:', data.message);
+  //     } else {
+  //       // Handle successful property creation
+  //       console.log('Property created:', data);
+  //       console.log('Images to be uploaded:', formData.image);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error submitting form:', error);
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Ensure image is included in the form data
     const formDataToSend = new FormData();
-
-      Object.entries(formData).forEach(([key, value]) => {
-        if (key === 'image' && Array.isArray(value)) {
-          value.forEach((file) => {
-            formDataToSend.append('images', file); // Use the correct key
-          });
-        } else {
-          formDataToSend.append(key, String(value)); // Append other fields as strings
-        }
-      });
-
+  
+    // Append all form fields
+    Object.entries(formData).forEach(([key, value]) => {
+      if (key === 'image' && value instanceof Array) {
+        value.forEach((file, _index) => {
+          formDataToSend.append(`image`, file);
+        });
+      } else {
+        formDataToSend.append(key, String(value));
+      }
+    });
+  
     try {
       setLoading(true);
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtY2UxMjNAZ21haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlkIjoyNywiaWF0IjoxNzI5Nzc2Nzc1LCJleHAiOjE3Mjk4NjMxNzV9.w2ndq7rnb-0ihIPLDSGdUE43O8NGielfhytHAUVBRQE'; // Replace with your actual token
-
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtY2UxMjNAZ21haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlkIjoyNywiaWF0IjoxNzI5Nzc2Nzc1LCJleHAiOjE3Mjk4NjMxNzV9.w2ndq7rnb-0ihIPLDSGdUE43O8NGielfhytHAUVBRQE';
+      
       const response = await fetch('https://flexdown.fly.dev/api/v1/property/create', {
         method: 'POST',
         headers: {
@@ -474,16 +530,14 @@ const PropertyForm: React.FC = () => {
         },
         body: formDataToSend,
       });
-
+  
       const data = await response.json();
       setLoading(false);
-
+  
       if (data.status === 'error') {
         console.error('Error:', data.message);
       } else {
-        // Handle successful property creation
         console.log('Property created:', data);
-        console.log('Images to be uploaded:', formData.image);
       }
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -697,18 +751,33 @@ const PropertyForm: React.FC = () => {
             />
           </div>
 
-          {/* Image Upload */}
+        {/* Image Upload */}
           <div className="flex flex-col mb-2">
-          <label className="text-sm font-medium">Image Upload</label>
-          <input
-            type="file"
-            multiple
-            accept="image/*" // Allow multiple file uploads
-            onChange={handleFileChange}
+            <label className="text-sm font-medium">Image Upload</label>
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={handleFileChange}
+              className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
             
-            className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
-        </div>
+            {/* Image Previews */}
+            <div className="mt-4 grid grid-cols-2 gap-4">
+              {formData.image && formData.image.map((file, index) => (
+                <div key={index} className='flex flex-col mb-2'>
+                  <label className="text-sm font-medium">Image {index + 1}</label>
+                  <img 
+                    src={URL.createObjectURL(file)} 
+                    alt={`Upload ${index + 1}`} 
+                    className="w-64 h-64 object-cover rounded-md"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+
 
           {/* Submit Button */}
           <button
