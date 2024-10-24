@@ -436,18 +436,6 @@ const PropertyForm: React.FC = () => {
     }));
   };
 
-  // Handle file change for images
-  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const files = e.target.files;
-  //   if (files) {
-  //     const fileArray = Array.from(files); // Convert FileList to an array
-  //     setFormData((prevState) => ({
-  //       ...prevState,
-  //       images: fileArray, // Save the files in the state
-  //     }));
-  //   }
-  // };
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
@@ -459,50 +447,6 @@ const PropertyForm: React.FC = () => {
     }
   };
 
-  // Handle form submission
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-
-  //   // Ensure image is included in the form data
-  //   const formDataToSend = new FormData();
-
-  //     Object.entries(formData).forEach(([key, value]) => {
-  //       if (key === 'image' && Array.isArray(value)) {
-  //         value.forEach((file) => {
-  //           formDataToSend.append('images', file); // Use the correct key
-  //         });
-  //       } else {
-  //         formDataToSend.append(key, String(value)); // Append other fields as strings
-  //       }
-  //     });
-
-  //   try {
-  //     setLoading(true);
-  //     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtY2UxMjNAZ21haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlkIjoyNywiaWF0IjoxNzI5Nzc2Nzc1LCJleHAiOjE3Mjk4NjMxNzV9.w2ndq7rnb-0ihIPLDSGdUE43O8NGielfhytHAUVBRQE'; // Replace with your actual token
-
-  //     const response = await fetch('https://flexdown.fly.dev/api/v1/property/create', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Authorization': `Bearer ${token}`,
-  //       },
-  //       body: formDataToSend,
-  //     });
-
-  //     const data = await response.json();
-  //     setLoading(false);
-
-  //     if (data.status === 'error') {
-  //       console.error('Error:', data.message);
-  //     } else {
-  //       // Handle successful property creation
-  //       console.log('Property created:', data);
-  //       console.log('Images to be uploaded:', formData.image);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error submitting form:', error);
-  //     setLoading(false);
-  //   }
-  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -511,14 +455,15 @@ const PropertyForm: React.FC = () => {
     // Append all form fields
     Object.entries(formData).forEach(([key, value]) => {
       if (key === 'image' && value instanceof Array) {
-        value.forEach((file, _index) => {
-          formDataToSend.append(`image`, file);
+        value.forEach((file, index) => {
+          formDataToSend.append('images[]', file);
+          formDataToSend.append('imagePositions[]', String(index));
         });
       } else {
         formDataToSend.append(key, String(value));
       }
     });
-  
+
     try {
       setLoading(true);
       const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtY2UxMjNAZ21haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlkIjoyNywiaWF0IjoxNzI5Nzc2Nzc1LCJleHAiOjE3Mjk4NjMxNzV9.w2ndq7rnb-0ihIPLDSGdUE43O8NGielfhytHAUVBRQE';
