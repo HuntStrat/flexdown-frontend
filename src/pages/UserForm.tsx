@@ -375,7 +375,7 @@
 
 // import { log } from 'console';
 import React, { useState } from 'react';
-
+import { Navigate, useNavigate } from 'react-router-dom';
 // Define the type for the form data
 interface PropertyFormData {
   category: string;
@@ -422,7 +422,7 @@ const PropertyForm: React.FC = () => {
 
   // const [image, setImage] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
-
+const navigate = useNavigate()
 
 
 
@@ -481,7 +481,7 @@ const PropertyForm: React.FC = () => {
   
       const data = await response.json();
       setLoading(false);
-  
+  navigate('/welcome-user')
       if (data.status === 'error') {
         console.error('Error:', data.message);
       } else {
