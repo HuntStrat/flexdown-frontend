@@ -393,10 +393,11 @@ interface PropertyFormData {
   bathrooms: number;
   square_feet: number;
   description: string;
-  image: File[] | null;
+
 }
 
 const PropertyForm: React.FC = () => {
+
   const [formData, setFormData] = useState<PropertyFormData>({
     category: '',
     sale_type: '',
@@ -414,9 +415,13 @@ const PropertyForm: React.FC = () => {
     bathrooms: 0,
     square_feet: 0,
     description: '',
-    image: [],
+   
   });
+  const [images, setImages] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
+
+
+
 
   // Handle input change
   const handleChange = (
@@ -447,17 +452,20 @@ const PropertyForm: React.FC = () => {
 
     // Ensure image is included in the form data
     const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      if (key === 'image' && value) {
-        formDataToSend.append(key, value); // Append file
-      } else {
-        formDataToSend.append(key, String(value)); // Append other fields as strings
-      }
-    });
+
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key === 'image' && Array.isArray(value)) {
+          value.forEach((file) => {
+            formDataToSend.append('images', file); // Use the correct key
+          });
+        } else {
+          formDataToSend.append(key, String(value)); // Append other fields as strings
+        }
+      });
 
     try {
       setLoading(true);
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZpbGlwdEBnbWFpbC5jb20iLCJyb2xlIjoic2VsbGVyIiwiaWQiOjIxLCJpYXQiOjE3Mjk1NDc1MjAsImV4cCI6MTcyOTYzMzkyMH0.-i__Tyai7COkBoLZS4b48dvTt3fdVr5pQ08RlLHn0Pk'; // Replace with your actual token
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtY2UxMjNAZ21haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlkIjoyNywiaWF0IjoxNzI5Nzc2Nzc1LCJleHAiOjE3Mjk4NjMxNzV9.w2ndq7rnb-0ihIPLDSGdUE43O8NGielfhytHAUVBRQE'; // Replace with your actual token
 
       const response = await fetch('https://flexdown.fly.dev/api/v1/property/create', {
         method: 'POST',
@@ -475,6 +483,7 @@ const PropertyForm: React.FC = () => {
       } else {
         // Handle successful property creation
         console.log('Property created:', data);
+        console.log('Images to be uploaded:', formData.image);
       }
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -690,14 +699,16 @@ const PropertyForm: React.FC = () => {
 
           {/* Image Upload */}
           <div className="flex flex-col mb-2">
-            <label className="text-sm font-medium">Image Upload</label>
-            <input
-              type="file"
-              onChange={handleFileChange}
-              accept="image/*"
-              className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            />
-          </div>
+          <label className="text-sm font-medium">Image Upload</label>
+          <input
+            type="file"
+            multiple
+            accept="image/*" // Allow multiple file uploads
+            onChange={handleFileChange}
+            
+            className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+        </div>
 
           {/* Submit Button */}
           <button

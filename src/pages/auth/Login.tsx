@@ -35,8 +35,13 @@ const Login: React.FC = () => {
   
       const data = await response.json();
       console.log('Login successful:', data);
+      localStorage.setItem('token', data.token);  // Store the token here
+    
+    console.log('Login successful:', data);
       navigate('/userform');
+      
       setLoading(false);
+      
     } catch (err: any) {
       setError(err.message || 'Login failed. Please try again.');
       setLoading(false);
