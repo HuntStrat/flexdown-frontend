@@ -373,6 +373,7 @@
 
 // export default PropertyForm;
 
+// import { log } from 'console';
 import React, { useState } from 'react';
 
 // Define the type for the form data
@@ -436,15 +437,12 @@ const PropertyForm: React.FC = () => {
     }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      const fileArray = Array.from(files);
-      setFormData((prevState) => ({
-        ...prevState,
-        image: fileArray,
-      }));
-    }
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    setFormData((prev) => ({
+      ...prev,
+      image: [...(prev.image || []), ...files],
+    }));
   };
 
 
@@ -456,6 +454,11 @@ const PropertyForm: React.FC = () => {
     Object.entries(formData).forEach(([key, value]) => {
       if (key === 'image' && value instanceof Array) {
         value.forEach((file, index) => {
+          if(file <= 4){
+            formDataToSend.append(key, String(value));
+           console.log("if block wey run chale")
+          }
+
           formDataToSend.append('images[]', file);
           formDataToSend.append('imagePositions[]', String(index));
         });
@@ -703,7 +706,7 @@ const PropertyForm: React.FC = () => {
               type="file"
               multiple
               accept="image/*"
-              onChange={handleFileChange}
+              onChange={handleFileUpload}
               className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
             
