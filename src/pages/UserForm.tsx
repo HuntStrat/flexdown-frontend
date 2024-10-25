@@ -375,7 +375,7 @@
 
 // import { log } from 'console';
 import React, { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // Define the type for the form data
 interface PropertyFormData {
   category: string;
@@ -439,10 +439,14 @@ const navigate = useNavigate()
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
-    setFormData((prev) => ({
-      ...prev,
-      image: [...(prev.image || []), ...files],
-    }));
+    if (files.length + (formData.image?.length || 0) <= 4) {
+      setFormData((prev) => ({
+        ...prev,
+        image: [...(prev.image || []), ...files],
+      }));
+    } else {
+      console.error("Only a maximum of 4 images are allowed.");
+    }
   };
 
 
@@ -452,24 +456,22 @@ const navigate = useNavigate()
   
     // Append all form fields
     Object.entries(formData).forEach(([key, value]) => {
-      if (key === 'image' && value instanceof Array) {
-        value.forEach((file, index) => {
-          if(file <= 4){
-            formDataToSend.append(key, String(value));
-           console.log("if block wey run chale")
-          }
-
-          formDataToSend.append('images[]', file);
-          formDataToSend.append('imagePositions[]', String(index));
+      if (key === "image" && Array.isArray(value)) {
+        // Ensure we're only sending up to 4 images
+        const imagesToSend = value.slice(0, 4);
+        imagesToSend.forEach((file, index) => {
+          formDataToSend.append("images[]", file);
+          formDataToSend.append("imagePositions[]", String(index));
         });
       } else {
         formDataToSend.append(key, String(value));
       }
     });
+  
 
     try {
       setLoading(true);
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtY2UxMjNAZ21haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlkIjoyNywiaWF0IjoxNzI5Nzc2Nzc1LCJleHAiOjE3Mjk4NjMxNzV9.w2ndq7rnb-0ihIPLDSGdUE43O8NGielfhytHAUVBRQE';
+      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZpbGlwZW1pMTIzQGdtYWlsLmNvbSIsInJvbGUiOiJzZWxsZXIiLCJpZCI6MzEsImlhdCI6MTcyOTg1OTQxNywiZXhwIjoxNzI5OTQ1ODE3fQ.k9UWSmp6Hm4xlflKIYNEjkn7TnaVJmtvmvcjaN5CLsU";
       
       const response = await fetch('https://flexdown.fly.dev/api/v1/property/create', {
         method: 'POST',
@@ -504,6 +506,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Category</label>
             <select
+            required
               name="category"
               value={formData.category}
               onChange={handleChange}
@@ -522,6 +525,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Sale Type</label>
             <select
+             required
               name="sale_type"
               value={formData.sale_type}
               onChange={handleChange}
@@ -538,6 +542,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Status</label>
             <select
+             required
               name="status"
               value={formData.status}
               onChange={handleChange}
@@ -553,6 +558,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Payment Plan</label>
             <select
+             required
               name="payment_plan"
               value={formData.payment_plan}
               onChange={handleChange}
@@ -569,6 +575,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Postal Code</label>
             <input
+            required
               type="text"
               name="postal_code"
               value={formData.postal_code}
@@ -581,6 +588,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">State</label>
             <input
+             required
               type="text"
               name="state"
               value={formData.state}
@@ -593,6 +601,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">City</label>
             <input
+             required
               type="text"
               name="city"
               value={formData.city}
@@ -605,6 +614,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Agency</label>
             <input
+             required
               type="text"
               name="agency"
               value={formData.agency}
@@ -617,6 +627,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Address</label>
             <input
+             required
               type="text"
               name="address"
               value={formData.address}
@@ -629,6 +640,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Mode of Payment</label>
             <select
+             required
               name="mode_of_payment"
               value={formData.mode_of_payment}
               onChange={handleChange}
@@ -644,6 +656,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Price</label>
             <input
+             required
               type="text"
               name="price"
               value={formData.price}
@@ -656,6 +669,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Bedrooms</label>
             <input
+             required
               type="number"
               name="bedrooms"
               value={formData.bedrooms}
@@ -668,6 +682,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Bathrooms</label>
             <input
+             required
               type="number"
               name="bathrooms"
               value={formData.bathrooms}
@@ -680,6 +695,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Square Feet</label>
             <input
+             required
               type="number"
               name="square_feet"
               value={formData.square_feet}
@@ -692,6 +708,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Description</label>
             <textarea
+             required
               name="description"
               value={formData.description}
               onChange={handleChange}
@@ -703,6 +720,7 @@ const navigate = useNavigate()
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Image Upload</label>
             <input
+             required
               type="file"
               multiple
               accept="image/*"
@@ -711,19 +729,17 @@ const navigate = useNavigate()
             />
             
             {/* Image Previews */}
-            <div className="mt-4 grid grid-cols-2 gap-4">
-              {formData.image && formData.image.map((file, index) => (
-                <div key={index} className='flex flex-col mb-2'>
-                  <label className="text-sm font-medium">Image {index + 1}</label>
-                  <img 
-                    src={URL.createObjectURL(file)} 
-                    alt={`Upload ${index + 1}`} 
-                    className="w-64 h-64 object-cover rounded-md"
-                  />
+            {formData.image && formData.image.length > 0 && (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {formData.image.map((img, index) => (
+                <div key={index} className="w-20 h-20 overflow-hidden border border-gray-300 rounded-md">
+                  <img src={URL.createObjectURL(img)} alt={`Upload ${index + 1}`} className="object-cover w-full h-full" />
                 </div>
               ))}
             </div>
-          </div>
+          )}
+        </div>
+
 
 
 
