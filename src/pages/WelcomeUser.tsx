@@ -144,9 +144,9 @@ const WelcomeUser: React.FC = () => {
         </button>
       </div>
 
-      <div className='flex flex-wrap justify-around'>
+      <div className='flex flex-wrap  justify-around'>
         {propertyData.map((property, index) => (
-          <div key={index} className='w-[28%] h-[40vh] border border-black border-t-0 rounded-md flex flex-col justify-around mb-4'>
+          <div key={index} className='w-[30%] border border-black rounded-md flex flex-col justify-around mb-4 p-2'>
             <img className='w-[100%] rounded-md top-0 border-t-black mb-2' src={image} alt="Property" />
             <p>Status: {property.status}</p>
             <p>Sale Type: {property.data.property.sale_type}</p>
