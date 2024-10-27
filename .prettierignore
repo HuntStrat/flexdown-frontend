@@ -1,0 +1,17 @@
+node_modules
+package.json
+package-lock.json
+index.html
+components.json
+.prettier*.*
+.eslint*.*
+.lintstagedrc.*
+postcss.config.js
+vite.config.ts
+vite-env.d.ts
+tsconfig.*
+tailwind.config.js
+main.tsx
+utils.ts
+index.css
+App.css
