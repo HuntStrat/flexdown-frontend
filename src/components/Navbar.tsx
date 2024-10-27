@@ -1,11 +1,11 @@
 // src/components/Navbar.tsx
-import React, { useState } from 'react';
-import { IoMenu } from 'react-icons/io5';
-import Logo from '../assets/images/logo/FlexDown-logo.png';
-import { useWindowResize } from '@/utils/windowResize';
+import React, { useState } from "react";
+import { IoMenu } from "react-icons/io5";
+import Logo from "../assets/images/logo/FlexDown-logo.png";
+import { useWindowResize } from "@/utils/windowResize";
 import { IoPersonAddSharp } from "react-icons/io5";
 import { IoPersonSharp } from "react-icons/io5";
-import { Link } from 'react-router-dom'; 
+import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const isMobile = useWindowResize();
@@ -15,11 +15,11 @@ const Navbar: React.FC = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   const menuItems = [
-    { href: '#flexdown', label: 'FlexDown' },
-    { href: '#packages', label: 'Packages' },
-    { href: '#analytics', label: 'Analytics' },
-    { href: '#faq', label: 'FAQ' },
-    { href: '#about-us', label: 'About Us' },
+    { href: "#flexdown", label: "FlexDown" },
+    { href: "#packages", label: "Packages" },
+    { href: "#analytics", label: "Analytics" },
+    { href: "#faq", label: "FAQ" },
+    { href: "#about-us", label: "About Us" },
   ];
 
   return (
@@ -31,9 +31,11 @@ const Navbar: React.FC = () => {
       </div>
       {isMobile ? (
         <div>
-      
-          <IoMenu className="text-4xl cursor-pointer text-white" onClick={toggleMenu} />
-        
+          <IoMenu
+            className="text-4xl cursor-pointer text-white"
+            onClick={toggleMenu}
+          />
+
           {isMenuOpen && (
             <nav className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 p-4">
               {menuItems.map(({ href, label }) => (
@@ -59,23 +61,24 @@ const Navbar: React.FC = () => {
         </nav>
       )}
 
+      <div className="text-white w-[15%] font-bold flex items-center justify-between">
+        {/* Login Button */}
+        <a className="flex items-end justify-between" href="login">
+          <span className="text-xl block md:hidden">
+            <IoPersonSharp />
+          </span>
 
+          <span className="hidden md:block">Login</span>
+        </a>
 
-<div className='text-white w-[15%] font-bold flex items-center justify-between'>
-  {/* Login Button */}
-  <a className='flex items-end justify-between' href="login">
- 
-    <span className="text-xl block md:hidden"><IoPersonSharp /></span> 
- 
-    <span className="hidden md:block">Login</span>
-  </a>
-  
-  {/* Signup Button */}
-  <Link className='flex items-center justify-between' to="/signup">
-          <span className="text-xl block md:hidden"><IoPersonAddSharp /></span>
+        {/* Signup Button */}
+        <Link className="flex items-center justify-between" to="/signup">
+          <span className="text-xl block md:hidden">
+            <IoPersonAddSharp />
+          </span>
           <span className="hidden md:block">Sign Up</span>
         </Link>
-</div>
+      </div>
     </div>
   );
 };
