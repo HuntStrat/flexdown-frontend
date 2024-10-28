@@ -37,7 +37,7 @@ const Login: React.FC = () => {
       console.log('Login successful:', data);
       localStorage.setItem('token', data.token);  // Store the token here
     
-    console.log('Login successful:', data);
+
       navigate('/userform');
       
       setLoading(false);

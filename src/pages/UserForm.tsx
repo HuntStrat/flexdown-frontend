@@ -97,7 +97,13 @@ const [loading, setLoading] = useState(false);
 
     try {
       setLoading(true);
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVta2ExMjNAZ21haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlkIjozMCwiaWF0IjoxNzMwMDI1OTI4LCJleHAiOjE3MzAxMTIzMjh9.s7MZsGurA_VRi3gTG37ckBEQioTaGGWxiLV1_QAYZlo';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVta2ExMjNAZ21haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlkIjozMCwiaWF0IjoxNzMwMTM2ODY2LCJleHAiOjE3MzAyMjMyNjZ9.R3QhsmYIXQB_EaEikE-zhBrd6u1l8vwPvTiUmZu3jnI'
+      // const token = localStorage.getItem('token');
+      // if (!token) {
+      //   alert("Token not found. Please log in again.");
+      //   setLoading(false);
+      //   return;
+      // }
       
       const response = await fetch('https://flexdown.fly.dev/api/v1/property/create', {
         method: 'POST',
@@ -140,6 +146,7 @@ const [loading, setLoading] = useState(false);
               onChange={handleChange}
               className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
+               <option value="">Select Category</option>
               <option value="commercial">commercial</option>
               <option value="condos">condos</option>
               <option value="studios">studios</option>
@@ -158,6 +165,7 @@ const [loading, setLoading] = useState(false);
               onChange={handleChange}
               className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
+                 <option value="">Select Type</option>
               <option value="for sale">for sale</option>
               <option value="for rent">for rent</option>
               <option value="rent to own">rent to own</option>
@@ -174,6 +182,7 @@ const [loading, setLoading] = useState(false);
               onChange={handleChange}
               className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
+                  <option value="">Select status</option>
               <option value="open house">open house</option>
               <option value="active">active</option>
               <option value="sold">sold</option>
@@ -189,6 +198,7 @@ const [loading, setLoading] = useState(false);
               onChange={handleChange}
               className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
+                  <option value="">Select plan</option>
               <option value="monthly">monthly</option>
               <option value="yearly">yearly</option>
               <option value="not applicable">not applicable</option>
@@ -271,11 +281,13 @@ const [loading, setLoading] = useState(false);
           <div className="flex flex-col mb-2">
             <label className="text-sm font-medium">Mode of Payment</label>
             <select
+            
               name="mode_of_payment"
               value={formData.mode_of_payment}
               onChange={handleChange}
               className="mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
+                  <option value="">Select payment</option>
               <option value="cash">cash</option>
               <option value="card">card</option>
               <option value="transfer">transfer</option>
