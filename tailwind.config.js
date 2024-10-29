@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+
+import tailwindcssAnimate from 'tailwindcss-animate'
+
+export default {
   darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -18,7 +21,6 @@ module.exports = {
       'black': '#000000',
       'gray' : '#888',
       'white' : '#ffffff',
-      'black': '#000000',
       'logo': '#3258a3',
       'purple': '#702dda',
       
@@ -37,7 +39,25 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Source Sans Pro', 'sans-serif'],
-        lexend: ['Lexend', 'sans-serif'],
+        // lexend: ['Lexend', 'sans-serif'],
+      },
+      screens: {
+        slg: '960px',
+      },
+         backdropFilter: {
+        "blur-5": "blur(5px)",
+      },
+      backgroundColor: {
+        glass: "rgba(255,255, 255, 0.8)",
+      },
+      borderColor: {
+        glass: "rgba(255,255, 255, 0.3)",
+      },
+      boxShadow: {
+        glass: "0 4px 30px rgba(0,0,0, 0.1)",
+      },
+      borderRadius: {
+        glass: "16px",
       },
       backgroundImage: {
         'real-estate-background': "url('/src/assets/images/real-estate.jpg')",
@@ -63,5 +83,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 }
