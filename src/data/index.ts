@@ -118,7 +118,7 @@ export const testimonials = [
 export const pricingCopy = {
   mainCopy: "Our Pricing",
   subCopy:
-    "Hear from satisfied clients who have transformed their property management experience with our platform.",
+    "Choose a plan that fits your business and unlocks powerful tools to elevate your property management",
 };
 
 export const pricingOptions = [
