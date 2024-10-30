@@ -22,6 +22,7 @@ const Login: React.FC = () => {
       const response = await fetch('https://flexdown.fly.dev/api/v1/sell/login/pub', {
         method: 'POST',
         headers: {
+         
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
@@ -35,9 +36,13 @@ const Login: React.FC = () => {
   
       const data = await response.json();
       console.log('Login successful:', data);
-      localStorage.setItem('token', data.token);  // Store the token here
-    
-
+      // Store the token in localStorage
+    if (data.data && data.data.token) {
+      localStorage.setItem('token', data.data.token);
+      console.log('Token stored:', data.data.token); // Confirm token storage
+    } else {
+      console.warn('Token not found in response data');
+    }
       navigate('/userform');
       
       setLoading(false);

@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import {useNavigate } from 'react-router-dom';
 // Define the type for the form data
 interface PropertyFormData {
@@ -23,7 +24,7 @@ interface PropertyFormData {
 }
 
 const PropertyForm: React.FC = () => {
-
+const navigate = useNavigate()
   const [formData, setFormData] = useState<PropertyFormData>({
     category: '',
     sale_type: '',
@@ -97,18 +98,19 @@ const [loading, setLoading] = useState(false);
 
     try {
       setLoading(true);
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVta2ExMjNAZ21haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlkIjozMCwiaWF0IjoxNzMwMTM2ODY2LCJleHAiOjE3MzAyMjMyNjZ9.R3QhsmYIXQB_EaEikE-zhBrd6u1l8vwPvTiUmZu3jnI'
-      // const token = localStorage.getItem('token');
-      // if (!token) {
-      //   alert("Token not found. Please log in again.");
-      //   setLoading(false);
-      //   return;
-      // }
-      
+
+      const token = localStorage.getItem('token');
+console.log('Retrieved Token:', token);
+if (!token) {
+  alert("Token not found. Please log in again.");
+  setLoading(false);
+  return;
+}
       const response = await fetch('https://flexdown.fly.dev/api/v1/property/create', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
+         
         },
         body: formDataToSend,
       });
@@ -117,7 +119,7 @@ const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVta2ExMjNAZ21h
       
       if (response.ok) {
         console.log('Property created successfully:', data);
-        // Reset form or redirect here
+       navigate('/welcome-user')
       } else {
         console.error('Error creating property:', data);
         alert(data.message || 'Error creating property');
@@ -418,28 +420,3 @@ const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVta2ExMjNAZ21h
 
 export default PropertyForm;
 
-//  {/* Image Upload */}
-//  <div className="flex flex-col mb-2">
-//  <label className="text-sm font-medium">Image Upload</label>
-//  <input
-//  type="file"
-//  multiple
-//  accept="image/*"
-//  onChange={handleFileUpload}
-//  className="mt-1 p-2 border-gray-300 rounded-md shadow-sm"
-// />
- 
-//  {/* Image Previews */}
-//  <div className="mt-4 grid grid-cols-2 gap-4">
-//    {formData.image && formData.image.map((file, index) => (
-//      <div key={index} className='flex flex-col mb-2'>
-//        <label className="text-sm font-medium">Image {index + 1}</label>
-//        <img 
-//          src={URL.createObjectURL(file)} 
-//          alt={`Upload ${index + 1}`} 
-//          className="w-64 h-64 object-cover rounded-md"
-//        />
-//      </div>
-//    ))}
-//  </div>
-// </div>
