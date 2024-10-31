@@ -1,34 +1,37 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const WaitingList: React.FC = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false); // For error handling
   const navigate = useNavigate();
   const handleSubmit = async () => {
     if (email) {
       try {
-        const response = await fetch('https://flexdown.fly.dev/api/v1/man/user/pub', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+        const response = await fetch(
+          "https://flexdown.fly.dev/api/v1/man/user/pub",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email }),
           },
-          body: JSON.stringify({ email }),
-        });
+        );
         if (response.ok) {
           // Show success message
           setShowSuccess(true);
           setShowError(false); // Clear error if any
           // Redirect after a short delay
           setTimeout(() => {
-            navigate('/signup');
+            navigate("/signup");
           }, 2000);
         } else {
           // If the response is not OK, show an error message
           setShowError(true);
         }
       } catch (error) {
-        console.error('Error submitting the form:', error);
+        console.error("Error submitting the form:", error);
         setShowError(true); // Show error message if there's a network error
       }
     }
@@ -38,7 +41,10 @@ const WaitingList: React.FC = () => {
       <div className="h-[40vh] flex flex-col items-center">
         <div>
           <h1 className="text-3xl md:text-4xl m-8 font-bold">
-            Special Perks for the First <span className="text-purple font-sans">200 Buyers and Sellers!</span>
+            Special Perks for the First{" "}
+            <span className="text-purple font-sans">
+              200 Buyers and Sellers!
+            </span>
           </h1>
         </div>
         <div className="h-[15vh] flex flex-col items-center justify-between w-full mb-4">

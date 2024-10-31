@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../../../App.css'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../../../App.css";
 interface SellerFormProps {
   onSwitch: () => void;
 }
 
 const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
-    first_name: '',
-    surname: '',
-    email: '',
-    ghana_ecowas_number: '',
-    city: '',
-    mobile_number: '',
-    whatsapp_number: '',
-    password: '',
-    agency_name: '',
-    license_number: '',
-    bio: '',
-    rating: '',
+    first_name: "",
+    surname: "",
+    email: "",
+    ghana_ecowas_number: "",
+    city: "",
+    mobile_number: "",
+    whatsapp_number: "",
+    password: "",
+    agency_name: "",
+    license_number: "",
+    bio: "",
+    rating: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,48 +34,50 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
       const response = await fetch(
-        'https://flexdown.fly.dev/api/v1/sell/sellers/pub',
+        "https://flexdown.fly.dev/api/v1/sell/sellers/pub",
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             ...formData,
             rating: parseFloat(formData.rating), // Ensure rating is a number
           }),
-        }
+        },
       );
 
       if (!response.ok) {
-        throw new Error('Failed to register seller');
+        throw new Error("Failed to register seller");
       }
 
       const data = await response.json();
-      console.log('Seller registration successful:', data);
-      navigate('/login')
+      console.log("Seller registration successful:", data);
+      navigate("/login");
     } catch (err: any) {
-      console.error('Error during registration:', err);
-      setError(err.message || 'Signup failed. Please try again.');
+      console.error("Error during registration:", err);
+      setError(err.message || "Signup failed. Please try again.");
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   return (
-
     <div className="w-full h-[60vh] overflow-auto max-h-[300px] hide-scrollbar max-w-md bg-gray-100 rounded-lg">
-      <a className="mb-8 font-bold flex justify-end cursor-pointer" onClick={onSwitch}>
+      <a
+        className="mb-8 font-bold flex justify-end cursor-pointer"
+        onClick={onSwitch}
+      >
         Register as <span className="text-purple ml-2">Buyer</span>
       </a>
 
       {error && <div className="text-red-500 mb-4">{error}</div>}
 
-      <form className='font-bold' onSubmit={handleSubmit}>
+      <form className="font-bold" onSubmit={handleSubmit}>
         <div className="flex justify-between">
           <div className="mb-4 mr-2 md:mr-0">
             <label className="block mb-2">First Name</label>
@@ -221,13 +223,13 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
           />
         </div>
 
-        <div className='flex justify-center items-center'>
+        <div className="flex justify-center items-center">
           <button
             type="submit"
-            className={`rounded-lg bg-black hover:bg-purple font-lexend text-white p-4 px-32 md:px-24 drop-shadow-xl md:mb-8 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`rounded-lg bg-black hover:bg-purple font-lexend text-white p-4 px-32 md:px-24 drop-shadow-xl md:mb-8 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
             disabled={loading}
           >
-            {loading ? 'Submitting...' : 'Submit'}
+            {loading ? "Submitting..." : "Submit"}
           </button>
         </div>
       </form>

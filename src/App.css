@@ -1,9 +1,28 @@
-@fontsource/lexend;
+/* @rontsource/lexend; */
 
 #root {
-  max-width: 2560px;
+  /* max-width: 1344px; */
   margin: 0 auto;
   padding: 0 auto;
+  position: relative;
+}
+
+section {
+  max-width: 1344px;
+  margin: 0 auto;
+}
+
+.header {
+  max-width: 100vw;
+  align-items: center;
+  /* justify-items: center; */
+  /* Larger than #root */
+  width: 100%;
+  /* Optional, to fill up to 1600px */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  /* max-width: 800px; */
 }
 
 .hide-scrollbar {
@@ -13,4 +32,22 @@
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+    /* Slide by half of the container's width */
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+  /* Adjust speed as needed */
 }
