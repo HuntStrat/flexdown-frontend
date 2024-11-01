@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <div className="flex justify-between  items-center w-full md:w-[80%] fixed top-0 left-1/2 -translate-x-1/2 py-8 px-4   rounded-none sm:rounded-full bg-primary  bg-opacity-50 sm:top-6 shadow-lg shadow-black/[0.03] backdrop-blur-[0.5rem] h-[4.5rem] sm:h-[3.25rem]">
+    <div className="flex justify-between  items-center w-full md:w-[80%] fixed top-0 left-1/2 z-100 -translate-x-1/2 py-8 px-4   rounded-none sm:rounded-full bg-primary  bg-opacity-50 sm:top-6 shadow-lg shadow-black/[0.03] backdrop-blur-[0.5rem] h-[4.5rem] sm:h-[3.25rem]">
       {/* Logo */}
 
       <div className="logo flex items-center ">
