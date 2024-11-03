@@ -38,8 +38,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Source Sans Pro', 'sans-serif'],
-        // lexend: ['Lexend', 'sans-serif'],
+        lexend: ['Lexend', 'sans-serif'],
       },
       screens: {
         slg: '960px',
