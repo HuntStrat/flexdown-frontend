@@ -1,5 +1,5 @@
 import React from "react";
-import CtaButton from "./CtaButton";
+import CallToActionButton from "./CallToActionButton";
 import { CheckCheckIcon } from "lucide-react";
 
 interface PricingCardType {
@@ -24,8 +24,10 @@ const PricingCard: React.FC<PricingCardType> = ({
   features,
 }) => {
   return (
-    <div className={`rounded-2xl p-6 lg:max-w-sm ${otherClasses}`}>
-      <div className="card-header">
+    <div
+      className={`rounded-2xl p-6 lg:max-w-sm flex flex-col ${otherClasses}`}
+    >
+      <div className="card-header ">
         <h1 className="text-2xl capitalize font-semibold mb-2">{title}</h1>
         <p className="text-[#576a8a] leading-[1.2em] mb-4">{desc}</p>
         <h1 className="text-[40px] font-semibold leading-[1em]">
@@ -34,11 +36,13 @@ const PricingCard: React.FC<PricingCardType> = ({
         </h1>
         <p className="text-[#576a8a] text-sm font-light ">{choiceText}</p>
       </div>
-      <CtaButton
+
+      <CallToActionButton
         title="Get Started Now"
         linkTo="/plan-starter"
         otherClasses={`${id == 1 && "bg-white border-[#E3E3E3] text-black"} ${id == 2 && "bg-[#3b81f4] border-[#3b81f4] text-white"} text-center font-semibold text-sm border my-4 `}
       />
+
       <div className="card-footer flex flex-col gap-3 ">
         <h2 className="font-semibold text-[16px]">{featuresText}</h2>
         <ul className=" flex flex-col gap-3">

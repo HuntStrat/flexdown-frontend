@@ -1,5 +1,5 @@
 import React from "react";
-import CtaButton from "./ui/CtaButton";
+import CallToActionButton from "./ui/CallToActionButton";
 import HeroCopy from "./ui/HeroCopy";
 // import Navbar from "./Navbar";
 // import { useState, useEffect } from "react";
@@ -29,13 +29,13 @@ const Header: React.FC = () => {
           <HeroCopy />
 
           <div className="flex gap-4 mt-8 mx-auto xl:mx-0">
-            <CtaButton
+            <CallToActionButton
               title="Get Started Now"
               linkTo="/get-started"
               otherClasses="text-white bg-[#3b81f4] w-max "
             />
 
-            <CtaButton
+            <CallToActionButton
               title="Learn more"
               linkTo="/learn-more"
               otherClasses="text-black bg-white w-max"

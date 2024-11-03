@@ -15,7 +15,7 @@ const Pricing = () => {
         {pricingCopy.subCopy}
       </h3>
 
-      <div className="pricing-cards flex flex-col slg:flex-row  mt-12 gap-4 ">
+      <div className="pricing-cards flex flex-col slg:flex-row mt-12 gap-4 ">
         {pricingOptions.map((item) => (
           <React.Fragment key={item.id}>
             <PricingCard

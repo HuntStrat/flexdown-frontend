@@ -1,5 +1,5 @@
 import { bannerCopy } from "../data";
-import CtaButton from "./ui/CtaButton";
+import CallToActionButton from "./ui/CallToActionButton";
 const Banner = () => {
   return (
     <section className="my-28 flex flex-col justify-center items-center ">
@@ -10,7 +10,7 @@ const Banner = () => {
           {bannerCopy}
         </h1>
 
-        <CtaButton
+        <CallToActionButton
           linkTo="/get-started"
           title="Get Started Now"
           otherClasses="bg-white w-max font-medium border border-[#E3E3E3] "

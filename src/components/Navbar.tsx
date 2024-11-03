@@ -13,7 +13,7 @@ import {
 // import { IoPersonSharp } from "react-icons/io5";
 // import { Link } from "react-router-dom";
 import { navData } from "@/data";
-// import CtaButton from "./ui/CtaButton";
+// import CallToActionButton from "./ui/CallToActionButton";
 import NavButton from "./ui/NavButton";
 import { Link } from "react-router-dom";
 
@@ -120,7 +120,7 @@ const Navbar: React.FC = () => {
               <IoPersonAddSharp />
             </span>
           </Link>
-          {/* <CtaButton
+          {/* <CallToActionButton
             title="Get Started"
             linkTo="/get-started"
             otherClasses={`bg-white text-black w-max border ${hasScrolled ? "border-[#E3E3E3]" : "border-[#E3E3E3]"}  `} /> */}
@@ -154,12 +154,12 @@ const Navbar: React.FC = () => {
                     </React.Fragment>
                   ))}
                 </ul>
-                {/* <CtaButton
+                {/* <CallToActionButton
                   title="Get Started"
                   linkTo="/get-started"
                   otherClasses={`bg-white text-black w-max border ${hasScrolled ? "border-[#E3E3E3]" : "border-[#E3E3E3]"}  `} /> */}
 
-                {/* <CtaButton
+                {/* <CallToActionButton
                   title="Login "
                   linkTo="/login"
                   otherClasses={`bg-white text-black w-max border ${hasScrolled ? "border-[#E3E3E3]" : "border-[#E3E3E3]"}  `} /> */}

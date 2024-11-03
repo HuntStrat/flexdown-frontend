@@ -1,5 +1,5 @@
 import React from "react";
-import CtaButton from "./ui/CtaButton";
+import CallToActionButton from "./ui/CallToActionButton";
 import { faqCopy, faqs } from "../data";
 import { Accordion, AccordionItem } from "./ui/Accordion";
 
@@ -14,7 +14,7 @@ const Faq = () => {
           {faqCopy.mainCopy}
         </h1>
         <h3 className="text-[#576a8a] text-sm lg:text-xl">{faqCopy.subCopy}</h3>
-        <CtaButton
+        <CallToActionButton
           linkTo="/conatct"
           title="Contact Us"
           otherClasses=" text-center font-semibold text-sm border text-white bg-[#3b81f4] w-max"
