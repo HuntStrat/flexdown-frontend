@@ -1,8 +1,6 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import {useNavigate } from 'react-router-dom';
-// Define the type for the form data
+
 interface PropertyFormData {
   category: string;
   sale_type: string;
@@ -20,11 +18,11 @@ interface PropertyFormData {
   bathrooms: number;
   square_feet: number;
   description: string;
-  image: File[] | null; // Changed to array of Files
+  image: File[] | null;
 }
 
 const PropertyForm: React.FC = () => {
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<PropertyFormData>({
     category: '',
     sale_type: '',
@@ -37,22 +35,15 @@ const navigate = useNavigate()
     city: '',
     state: '',
     postal_code: '',
-    price:Number(0),
-    bedrooms: Number(0),
-    bathrooms: Number(0),
-    square_feet:  Number(0),
+    price: 0,
+    bedrooms: 0,
+    bathrooms: 0,
+    square_feet: 0,
     description: '',
-    image: null, // Initialize as null
+    image: null,
   });
+  const [loading, setLoading] = useState(false);
 
-
-  // const [image, setImage] = useState<File[]>([]);
-const [loading, setLoading] = useState(false);
-// const navigate = useNavigate()
-
-
-
-  // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -65,61 +56,53 @@ const [loading, setLoading] = useState(false);
     const files = Array.from(e.target.files || []);
     if (files.length > 4) {
       alert("Maximum 4 images allowed");
+      e.target.value = ''; // clears the input
       return;
     }
     setFormData(prev => ({
       ...prev,
-      image: files // Set the new files directly instead of concatenating
+      image: files
     }));
   };
 
-
+  const getToken = () => {
+    const token = localStorage.getItem('token');
+    const expiryTime = localStorage.getItem('tokenExpiry');
+    if (token && expiryTime && Date.now() < parseInt(expiryTime, 10)) {
+      return token;
+    } else {
+      localStorage.removeItem('token');
+      localStorage.removeItem('tokenExpiry');
+      alert("Token expired. Please log in again.");
+      return null;
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formDataToSend = new FormData();
-  
-    // Append all form fields except image
     Object.entries(formData).forEach(([key, value]) => {
-      if (key !== 'image') {
-        formDataToSend.append(key, String(value));
-      }
+      if (key !== 'image') formDataToSend.append(key, String(value));
     });
-  
-    // Handle image files separately
     if (formData.image) {
-      formData.image.forEach((file) => {
-        formDataToSend.append(`image`, file); // Use the actual file object, not just the name
-      });
+      formData.image.forEach(file => formDataToSend.append('image', file));
     }
-
-
-    console.log("Submitted Data:", formData); // or the variable holding the form data
 
     try {
       setLoading(true);
+      const token = getToken();
+      if (!token) return;
 
-      const token = localStorage.getItem('token');
-console.log('Retrieved Token:', token);
-if (!token) {
-  alert("Token not found. Please log in again.");
-  setLoading(false);
-  return;
-}
       const response = await fetch('https://flexdown.fly.dev/api/v1/property/create', {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-         
-        },
+        headers: { 'Authorization': `Bearer ${token}` },
         body: formDataToSend,
       });
-  
+
       const data = await response.json();
-      
       if (response.ok) {
         console.log('Property created successfully:', data);
-       navigate('/welcome-user')
+        navigate('/welcome-user');
       } else {
         console.error('Error creating property:', data);
         alert(data.message || 'Error creating property');

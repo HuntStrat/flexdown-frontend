@@ -31,22 +31,27 @@ const WelcomeUser: React.FC = () => {
 
   const fetchPropertyData = async () => {
     try {
-      const token = localStorage.getItem('token'); // Retrieve the token from localStorage or sessionStorage
+      const token = localStorage.getItem('token');
       console.log("Token:", token);
+      
+      const requestBody = {
+        status: formData.status,
+        sale_type: formData.saleType,
+        category: formData.category,
+        price: formData.price,
+        address: formData.address,
+        images: formData.images.map(url => ({ url }))
+      };
+  
+      console.log("Request Body:", JSON.stringify(requestBody)); // Log the request body
+  
       const response = await fetch('https://flexdown.fly.dev/api/v1/property/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}` 
         },
-        body: JSON.stringify({
-          status: formData.status,
-          sale_type: formData.saleType,
-          category: formData.category,
-          price: formData.price,
-          address: formData.address,
-          images: formData.images.map(url => ({ url }))
-        })
+        body: JSON.stringify(requestBody)
       });
   
       if (!response.ok) {
@@ -54,7 +59,6 @@ const WelcomeUser: React.FC = () => {
       }
   
       const data = await response.json();
-      // Access the property data and set it
       setPropertyData(data.data.property); 
       setLoading(false);
     } catch (error) {
@@ -64,13 +68,6 @@ const WelcomeUser: React.FC = () => {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;

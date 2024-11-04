@@ -22,37 +22,31 @@ const Login: React.FC = () => {
       const response = await fetch('https://flexdown.fly.dev/api/v1/sell/login/pub', {
         method: 'POST',
         headers: {
-         
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
-        console.error('Error details:', errorData);
         throw new Error(errorData.message || 'Login failed. Please try again.');
       }
-  
+
       const data = await response.json();
-      console.log('Login successful:', data);
-      // Store the token in localStorage
-    if (data.data && data.data.token) {
-      localStorage.setItem('token', data.data.token);
-      console.log('Token stored:', data.data.token); // Confirm token storage
-    } else {
-      console.warn('Token not found in response data');
-    }
-      navigate('/userform');
-      
-      setLoading(false);
-      
+const tokenDuration = 3600 * 1000
+      if (data.data?.token) {
+        localStorage.setItem('token', data.data.token);
+        localStorage.setItem('tokenExpiry', (Date.now() + tokenDuration).toString());
+        navigate('/userform');
+      } else {
+        console.warn('Token not found in response data');
+      }
     } catch (err: any) {
       setError(err.message || 'Login failed. Please try again.');
+    } finally {
       setLoading(false);
     }
   };
-
   return (
     <div className="h-screen w-full p-8 md:flex justify-between items-center font-lexend">
       <div className="w-full md:w-1/2 h-full flex flex-col items-center justify-around">
