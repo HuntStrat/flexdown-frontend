@@ -22,6 +22,7 @@ module.exports = {
       'black': '#000000',
       'logo': '#3258a3',
       'purple': '#702dda',
+      'red': '#FF0000',
       
             },
     container: {
