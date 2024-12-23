@@ -203,7 +203,7 @@ export default WelcomeUser;
   
 //       console.log("Request Body:", JSON.stringify(requestBody)); // Log the request body
   
-//       const response = await fetch('https://flexdown.fly.dev/api/v1/property/create', {
+//       const response = await fetch('https://lockedin-flexdown.fly.dev/api/v1/property/create', {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',

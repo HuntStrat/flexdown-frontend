@@ -35,7 +35,7 @@ const BuyerForm: React.FC<BuyerFormProps> = ({ onSwitch }) => {
 
     try {
       const response = await fetch(
-        'https://flexdown.fly.dev/api/v1/buyer/buyer/pub',
+        'https://lockedin-flexdown.fly.dev/api/v1/buyer/buyer/pub',
         {
           method: 'POST',
           headers: {

@@ -93,7 +93,7 @@ const PropertyForm: React.FC = () => {
       const token = getToken();
       if (!token) return;
 
-      const response = await fetch('https://flexdown.fly.dev/api/v1/property/create', {
+      const response = await fetch('https://lockedin-flexdown.fly.dev/api/v1/property/create', {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` },
         body: formDataToSend,

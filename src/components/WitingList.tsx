@@ -8,7 +8,7 @@ const WaitingList: React.FC = () => {
   const handleSubmit = async () => {
     if (email) {
       try {
-        const response = await fetch('https://flexdown.fly.dev/api/v1/man/user/pub', {
+        const response = await fetch('https://lockedin-flexdown.fly.dev/api/v1/man/user/pub', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
