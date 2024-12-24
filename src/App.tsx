@@ -7,6 +7,7 @@ import SignUp from "./pages/auth/SignUp";
 import UserForm from "./pages/UserForm";
 import Login from "./pages/auth/Login";
 import WelcomeUser from "./pages/WelcomeUser";
+import ListProperty from "./pages/Listing";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
 
           <Route path="/userform" element={<UserForm />} />
+          <Route path="/listproperty" element={< ListProperty/>} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/welcome-user" element={<WelcomeUser />} />
