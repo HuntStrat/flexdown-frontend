@@ -38,7 +38,7 @@ const SellerForm: React.FC<SellerFormProps> = ({ onSwitch }) => {
 
     try {
       const response = await fetch(
-        "https://flexdown.fly.dev/api/v1/sell/sellers/pub",
+        "https://lockedin-flexdown.fly.dev/api/v1/sell/sellers/pub",
         {
           method: "POST",
           headers: {
