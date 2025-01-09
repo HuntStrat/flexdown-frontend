@@ -1,4 +1,6 @@
+
 import React, { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
     const PropertyForm = () => {
     // Form state
@@ -46,7 +48,7 @@ import React, { useState, useCallback } from 'react';
     const [isUploading, setIsUploading] = useState(false);
     const [amenityInput, setAmenityInput] = useState('');
     const [uploadProgress, setUploadProgress] = useState(0);
-
+const navigate = useNavigate()
        // Modified uploadImage function with better error handling and logging
        const uploadImage = async (file: File): Promise<string> => {
         try {
@@ -131,6 +133,7 @@ import React, { useState, useCallback } from 'react';
             e.preventDefault();
             setIsUploading(true);
             setUploadProgress(0);
+            navigate('/user-list')
     
             try {
                 console.log('Starting form submission process');
@@ -170,11 +173,11 @@ import React, { useState, useCallback } from 'react';
     
                 // Submit to your backend endpoint
                 // 'https://lockedin-flexdown.fly.dev/api/v1/property/add/hi/pub'
-                const response = await fetch('http://localhost:7060/api/v1/property/add/hi/pub', {
+                const response = await fetch('https://lockedin-flexdown.fly.dev/api/v1/property/add/hi/pub', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzYTIxQGdtYWlsLmNvbSIsInJvbGUiOiJzZWxsZXIiLCJpZCI6MTEsImlhdCI6MTczNDk5NjIxMSwiZXhwIjoxNzM1MDgyNjExfQ.ko_oD1eSfEEqhxlPgIIBaEqYDFQp_5VFMQqR0h8VIsc'
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImthcmF0YXNoZXZza2FlbWlsaWphQGdtYWlsLmNvbSIsInJvbGUiOiJzZWxsZXIiLCJpZCI6MywiaWF0IjoxNzM2NDI4OTE4LCJleHAiOjE3MzY1MTUzMTh9.vUCF4N3Bp4CDZd8NIY_sFRqxxFkJmHk3gVEQyu574Rg'
                     },
                     body: JSON.stringify(finalFormData)
                 });
@@ -261,6 +264,9 @@ import React, { useState, useCallback } from 'react';
                 >
                 <option value="Commercial">Commercial</option>
                 <option value="Residential">Residential</option>
+                <option value="Apartments">Apartments</option>
+                <option value="SingleHomes">Single Homes</option>
+                <option value="Condos">Condos</option>
                 </select>
             </div>
 
@@ -329,6 +335,7 @@ import React, { useState, useCallback } from 'react';
                 name="title"
                 value={formData.title}
                 onChange={handleChange}
+                 placeholder="Property Title"
                 className="w-full p-2 border rounded"
                 required
                 />
@@ -472,29 +479,28 @@ import React, { useState, useCallback } from 'react';
             <button
                 type="button"
                 onClick={handleAmenityAdd}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-facebook text-black rounded hover:bg-blue-600"
             >
                 Add
             </button>
             </div>
 
             <div className="flex flex-wrap gap-2">
-            {formData.amenities.map((amenity, index) => (
-                <span
-                key={index}
-                className="px-3 py-1 bg-gray-100 rounded-full flex items-center gap-2"
-                >
-                {amenity}
-                <button
-                    type="button"
-                    onClick={() => handleAmenityRemove(index)}
-                    className="text-red-500 hover:text-red-700"
-                >
-                    ×
-                </button>
-                </span>
-            ))}
-            </div>
+            <ul className="space-y-2 mt-4">
+    {formData.amenities.map((amenity, index) => (
+      <li key={index} className="flex items-center space-x-2">
+        <span>{amenity}</span>
+        <button
+          type="button"
+          onClick={() => handleAmenityRemove(index)}
+          className="text-red-500"
+        >
+          x
+        </button>
+      </li>
+    ))}
+  </ul>
+</div>
         </div>
 
         {/* Image Upload */}
@@ -504,13 +510,13 @@ import React, { useState, useCallback } from 'react';
             <div className="space-y-4">
             <div>
                 <label className="block text-sm font-medium mb-1">
-                Base Image (Required)
+                Base Image 
                 </label>
                 <input
                 type="file"
                 accept="image/*"
                 onChange={handleBaseImageChange}
-                className="w-full p-2 border rounded"
+                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200"
                 required
                 />
             </div>
@@ -524,7 +530,7 @@ import React, { useState, useCallback } from 'react';
                 accept="image/*"
                 multiple
                 onChange={handleAdditionalImagesChange}
-                className="w-full p-2 border rounded"
+                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200"
                 disabled={additionalImages.length >= 5}
                 />
             </div>
@@ -543,7 +549,7 @@ import React, { useState, useCallback } from 'react';
                 <button
                     type="submit"
                     disabled={isUploading}
-                    className="w-full md:w-auto px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 font-bold"
+                    className="w-full md:w-auto px-6 py-3 bg-facebook text-black rounded hover:bg-blue-600 disabled:opacity-50 font-bold"
                     style={{ minWidth: '200px' }} // Ensure button has good width
                 >
                     {isUploading ? (
@@ -566,6 +572,10 @@ import React, { useState, useCallback } from 'react';
             </div>
         </form>
     );
-    };
+    }
+    ;
 
     export default PropertyForm;
+
+
+

@@ -18,7 +18,7 @@ const Login: React.FC = () => {
 
     try {
       const response = await fetch(
-        "https://flexdown.fly.dev/api/v1/sell/login/pub",
+        "https://lockedin-flexdown.fly.dev/api/v1/sell/login/pub",
         {
           method: "POST",
           headers: {
